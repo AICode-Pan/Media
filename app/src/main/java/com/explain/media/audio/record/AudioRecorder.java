@@ -4,6 +4,8 @@ import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 
+import com.explain.media.Utils.SDFileUtil;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -33,7 +35,7 @@ public class AudioRecorder {
     private AudioRecord audioRecord;
     private boolean isRecord = false;// 设置正在录制的状态
     //AudioName裸音频数据文件
-    private static final String AudioName = "/sdcard/ARecord.pcm";//不推荐这么写，可以用Enviroment.
+    private static final String AudioName = SDFileUtil.getSDPath() + "/ARecord.pcm";//不推荐这么写，可以用Enviroment.
 
     public AudioRecorder() {
         creatAudioRecord();

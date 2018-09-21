@@ -3,6 +3,8 @@ package com.explain.media.audio.record;
 import android.media.AudioFormat;
 import android.media.MediaRecorder;
 
+import com.explain.media.Utils.SDFileUtil;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -26,7 +28,7 @@ public class MAudioRecorder {
     private static int audioFormat = AudioFormat.ENCODING_PCM_16BIT;
     private MediaRecorder mRecorder;
     //AudioName裸音频数据文件
-    private static final String AudioName = "/sdcard/MRecord.m4a";//不推荐这么写，可以用Enviroment.
+    private static final String AudioName = SDFileUtil.getSDPath() + "/MRecord.m4a";//不推荐这么写，可以用Enviroment.
 
     public void startRecord() {
         try {
