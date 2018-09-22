@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.explain.media.audio.activity.ARecordActivity;
 import com.explain.media.audio.activity.MRecordActivity;
-import com.explain.media.audio.play.AudioPlayActivity;
+import com.explain.media.audio.activity.AudioPlayActivity;
 
 /**
  * <pre>

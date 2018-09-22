@@ -1,11 +1,10 @@
-package com.explain.media.audio.play;
+package com.explain.media.audio.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
@@ -18,7 +17,6 @@ import com.explain.media.Utils.SDFileUtil;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DecimalFormat;
 
 /**
  * <pre>
@@ -30,7 +28,7 @@ import java.text.DecimalFormat;
  */
 
 public class AudioPlayActivity extends Activity implements View.OnClickListener {
-    private static final String TAG = AudioPlayActivity.class.getName();
+    private static final String TAG = AudioPlayActivity.class.getSimpleName();
     private final int ACTIVITY_RESULT = 0x01;
 
     private EditText filePath;
@@ -49,8 +47,6 @@ public class AudioPlayActivity extends Activity implements View.OnClickListener 
 
         findViewById(R.id.btn_choose_file).setOnClickListener(this);
         findViewById(R.id.btn_audio_play).setOnClickListener(this);
-
-        mediaPlayer = new MediaPlayer();
     }
 
     @Override
@@ -66,8 +62,20 @@ public class AudioPlayActivity extends Activity implements View.OnClickListener 
                 break;
             case R.id.btn_audio_play:
                 try {
-                    mediaPlayer.setDataSource(filePath.getText().toString());
+                    String path =filePath.getText().toString();
+                    Log.i(TAG, TAG + ".path : " + path);
+                    mediaPlayer = new MediaPlayer();
+                    mediaPlayer.setDataSource(path);
+                    mediaPlayer.prepare();
                     mediaPlayer.start();
+                    mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            Log.i(TAG, TAG + ".onCompletion");
+                            mediaPlayer.release();
+                            mediaPlayer = null;
+                        }
+                    });
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -80,7 +88,7 @@ public class AudioPlayActivity extends Activity implements View.OnClickListener 
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ACTIVITY_RESULT && resultCode == RESULT_OK) {
             Uri treeUri = data.getData();
-            String path = treeUri.getPath();
+            String path = SDFileUtil.getPath(AudioPlayActivity.this, treeUri);
             Log.i(TAG, TAG + ".uri : " + treeUri + " ,path : " + path);
             updateFileInfo(path);
         }
@@ -102,31 +110,8 @@ public class AudioPlayActivity extends Activity implements View.OnClickListener 
         }
 
         long size = file.length();
-        fileSize.setText("文件大小:" + FormetFileSize(size));
+        fileSize.setText("文件大小:" + SDFileUtil.FormetFileSize(size));
     }
 
-    /**
-     * 转换文件大小
-     *
-     * @param fileS
-     * @return
-     */
-    private static String FormetFileSize(long fileS) {
-        DecimalFormat df = new DecimalFormat("#.00");
-        String fileSizeString = "";
-        String wrongSize = "0B";
-        if (fileS == 0) {
-            return wrongSize;
-        }
-        if (fileS < 1024) {
-            fileSizeString = df.format((double) fileS) + "B";
-        } else if (fileS < 1048576) {
-            fileSizeString = df.format((double) fileS / 1024) + "KB";
-        } else if (fileS < 1073741824) {
-            fileSizeString = df.format((double) fileS / 1048576) + "MB";
-        } else {
-            fileSizeString = df.format((double) fileS / 1073741824) + "GB";
-        }
-        return fileSizeString;
-    }
+
 }

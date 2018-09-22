@@ -20,6 +20,6 @@
 
         <activity android:name=".audio.activity.ARecordActivity"/>
         <activity android:name=".audio.activity.MRecordActivity"/>
-        <activity android:name=".audio.play.AudioPlayActivity"/>
+        <activity android:name=".audio.activity.AudioPlayActivity"/>
     </application>
 </manifest>
