@@ -53,7 +53,6 @@ public class AudioPlayActivity extends Activity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_choose_file:
-                //getUrl()获取文件目录，例如返回值为/storage/sdcard1/MIUI/music/mp3_hd/单色冰淇凌_单色凌.mp3
                 File file = new File(filePath.getText().toString());
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setDataAndType(Uri.fromFile(file), "*/*");
@@ -88,6 +87,7 @@ public class AudioPlayActivity extends Activity implements View.OnClickListener 
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ACTIVITY_RESULT && resultCode == RESULT_OK) {
             Uri treeUri = data.getData();
+            //getPath()获取文件目录，例如返回值为/storage/emulated/0/com.explain.media/MRecord.m4a
             String path = SDFileUtil.getPath(AudioPlayActivity.this, treeUri);
             Log.i(TAG, TAG + ".uri : " + treeUri + " ,path : " + path);
             updateFileInfo(path);
