@@ -115,44 +115,44 @@ JNIEXPORT jint JNICALL Java_com_explain_media_Utils_FFmpegCmd_pcm2aac
 	}
 
     //Encode
-//    for (i = 0; i < framenum; i++) {
-//        av_init_packet(&pkt);
-//        pkt.data = NULL;    // packet data will be allocated by the encoder
-//        pkt.size = 0;
-//		//Read raw data
-//		if (fread(frame_buf, 1, size, fp_in) <= 0){
-//            LOGI("Failed to read raw data! \n");
-//			return -1;
-//		} else if (feof(fp_in)) {
-//			break;
-//		}
-//
-//        pFrame->pts = i;
-//        ret = avcodec_encode_audio2(pCodecCtx, &pkt, pFrame, &got_output);
-//        if (ret < 0) {
-//            LOGI("Error encoding frame ret : %2d", ret);
-//            return -1;
-//        }
-//
-//        if (pkt.data == NULL)
-//        {
-//            av_free_packet(&pkt);
-//            continue;
-//        }
-//
-//
-//        if (got_output) {
-//            LOGI("Succeed to encode frame: %5d\tsize:%5d\n", framecnt, pkt.size);
-//			framecnt++;
-//
-//            padts[3] = (char)(((chanCfg & 3) << 6) + ((7 + pkt.size) >> 11));
-//            padts[4] = (char)(((7 + pkt.size) & 0x7FF) >> 3);
-//            padts[5] = (char)((((7 + pkt.size) & 7) << 5) + 0x1F);
-//            fwrite(padts, 7, 1, fp_out);
-//            fwrite(pkt.data, 1, pkt.size, fp_out);
-//            av_free_packet(&pkt);
-//        }
-//    }
+    for (i = 0; i < framenum; i++) {
+        av_init_packet(&pkt);
+        pkt.data = NULL;    // packet data will be allocated by the encoder
+        pkt.size = 0;
+		//Read raw data
+		if (fread(frame_buf, 1, size, fp_in) <= 0){
+            LOGI("Failed to read raw data! \n");
+			return -1;
+		} else if (feof(fp_in)) {
+			break;
+		}
+
+        pFrame->pts = i;
+        ret = avcodec_encode_audio2(pCodecCtx, &pkt, pFrame, &got_output);
+        if (ret < 0) {
+            LOGI("Error encoding frame ret : %2d", ret);
+            return -1;
+        }
+
+        if (pkt.data == NULL)
+        {
+            av_free_packet(&pkt);
+            continue;
+        }
+
+
+        if (got_output) {
+            LOGI("Succeed to encode frame: %5d\tsize:%5d\n", framecnt, pkt.size);
+			framecnt++;
+
+            padts[3] = (char)(((chanCfg & 3) << 6) + ((7 + pkt.size) >> 11));
+            padts[4] = (char)(((7 + pkt.size) & 0x7FF) >> 3);
+            padts[5] = (char)((((7 + pkt.size) & 7) << 5) + 0x1F);
+            fwrite(padts, 7, 1, fp_out);
+            fwrite(pkt.data, 1, pkt.size, fp_out);
+            av_free_packet(&pkt);
+        }
+    }
 
     //Flush Encoder
     for (got_output = 1; got_output; i++) {
