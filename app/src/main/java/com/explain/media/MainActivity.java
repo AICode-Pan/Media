@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.explain.media.audio.activity.ARecordActivity;
+import com.explain.media.audio.activity.AudioEncodeActivity;
 import com.explain.media.audio.activity.MRecordActivity;
 import com.explain.media.audio.activity.AudioPlayActivity;
 
@@ -29,6 +30,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         findViewById(R.id.button1).setOnClickListener(this);
         findViewById(R.id.button2).setOnClickListener(this);
         findViewById(R.id.button3).setOnClickListener(this);
+        findViewById(R.id.button4).setOnClickListener(this);
     }
 
     @Override
@@ -45,6 +47,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.button3:
                 intent.setClass(MainActivity.this, AudioPlayActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.button4:
+                intent.setClass(MainActivity.this, AudioEncodeActivity.class);
                 startActivity(intent);
                 break;
         }

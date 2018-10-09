@@ -1,12 +1,9 @@
 package com.explain.media.Utils;
 
-import android.app.Application;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
 
 import com.explain.media.CoreApplication;
@@ -33,12 +30,13 @@ public class SDFileUtil {
         if (sdDir.exists()) {
             sdDirPath = sdDir.toString();
         } else {
-            sdDirPath = "/sdcard/";
+            sdDirPath = "/sdcard";
         }
         sdDirPath = sdDirPath + "/" + CoreApplication.getContent().getPackageName();
 
         File file = new File(sdDirPath);
         if (file.exists()) {
+            Log.i(TAG, TAG + ".getSDPath.sdDirPath : " + sdDirPath);
             return sdDirPath;
         } else {
             file.mkdir();
