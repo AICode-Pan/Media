@@ -54,7 +54,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 build CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg/cmdutils.c.o: C_COMPILER__media-handle ../../../../src/main/cpp/ffmpeg/cmdutils.c
   DEFINES = -Dmedia_handle_EXPORTS
   DEP_FILE = CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg/cmdutils.c.o.d
-  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=15 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC
+  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC
   INCLUDES = -I../../../../src/main/cpp -I../../../../src/main/cpp/include
   IN_ABS = /Users/panbeixing/Documents/Project/Media/app/src/main/cpp/ffmpeg/cmdutils.c
   OBJECT_DIR = CMakeFiles/media-handle.dir
@@ -62,7 +62,7 @@ build CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg/cmdutils.c.o: C_COMPILER__
 build CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg/ffmpeg.c.o: C_COMPILER__media-handle ../../../../src/main/cpp/ffmpeg/ffmpeg.c
   DEFINES = -Dmedia_handle_EXPORTS
   DEP_FILE = CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg/ffmpeg.c.o.d
-  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=15 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC
+  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC
   INCLUDES = -I../../../../src/main/cpp -I../../../../src/main/cpp/include
   IN_ABS = /Users/panbeixing/Documents/Project/Media/app/src/main/cpp/ffmpeg/ffmpeg.c
   OBJECT_DIR = CMakeFiles/media-handle.dir
@@ -70,7 +70,7 @@ build CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg/ffmpeg.c.o: C_COMPILER__me
 build CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg/ffmpeg_filter.c.o: C_COMPILER__media-handle ../../../../src/main/cpp/ffmpeg/ffmpeg_filter.c
   DEFINES = -Dmedia_handle_EXPORTS
   DEP_FILE = CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg/ffmpeg_filter.c.o.d
-  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=15 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC
+  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC
   INCLUDES = -I../../../../src/main/cpp -I../../../../src/main/cpp/include
   IN_ABS = /Users/panbeixing/Documents/Project/Media/app/src/main/cpp/ffmpeg/ffmpeg_filter.c
   OBJECT_DIR = CMakeFiles/media-handle.dir
@@ -78,7 +78,7 @@ build CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg/ffmpeg_filter.c.o: C_COMPI
 build CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg/ffmpeg_opt.c.o: C_COMPILER__media-handle ../../../../src/main/cpp/ffmpeg/ffmpeg_opt.c
   DEFINES = -Dmedia_handle_EXPORTS
   DEP_FILE = CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg/ffmpeg_opt.c.o.d
-  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=15 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC
+  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC
   INCLUDES = -I../../../../src/main/cpp -I../../../../src/main/cpp/include
   IN_ABS = /Users/panbeixing/Documents/Project/Media/app/src/main/cpp/ffmpeg/ffmpeg_opt.c
   OBJECT_DIR = CMakeFiles/media-handle.dir
@@ -86,7 +86,7 @@ build CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg/ffmpeg_opt.c.o: C_COMPILER
 build CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg_cmd.c.o: C_COMPILER__media-handle ../../../../src/main/cpp/ffmpeg_cmd.c
   DEFINES = -Dmedia_handle_EXPORTS
   DEP_FILE = CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg_cmd.c.o.d
-  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=15 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC
+  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC
   INCLUDES = -I../../../../src/main/cpp -I../../../../src/main/cpp/include
   IN_ABS = /Users/panbeixing/Documents/Project/Media/app/src/main/cpp/ffmpeg_cmd.c
   OBJECT_DIR = CMakeFiles/media-handle.dir
@@ -94,7 +94,7 @@ build CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg_cmd.c.o: C_COMPILER__media
 build CMakeFiles/media-handle.dir/src/main/cpp/audio_player.c.o: C_COMPILER__media-handle ../../../../src/main/cpp/audio_player.c
   DEFINES = -Dmedia_handle_EXPORTS
   DEP_FILE = CMakeFiles/media-handle.dir/src/main/cpp/audio_player.c.o.d
-  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=15 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC
+  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC
   INCLUDES = -I../../../../src/main/cpp -I../../../../src/main/cpp/include
   IN_ABS = /Users/panbeixing/Documents/Project/Media/app/src/main/cpp/audio_player.c
   OBJECT_DIR = CMakeFiles/media-handle.dir
@@ -102,7 +102,7 @@ build CMakeFiles/media-handle.dir/src/main/cpp/audio_player.c.o: C_COMPILER__med
 build CMakeFiles/media-handle.dir/src/main/cpp/openSL_audio_player.c.o: C_COMPILER__media-handle ../../../../src/main/cpp/openSL_audio_player.c
   DEFINES = -Dmedia_handle_EXPORTS
   DEP_FILE = CMakeFiles/media-handle.dir/src/main/cpp/openSL_audio_player.c.o.d
-  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=15 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC
+  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC
   INCLUDES = -I../../../../src/main/cpp -I../../../../src/main/cpp/include
   IN_ABS = /Users/panbeixing/Documents/Project/Media/app/src/main/cpp/openSL_audio_player.c
   OBJECT_DIR = CMakeFiles/media-handle.dir
@@ -110,7 +110,7 @@ build CMakeFiles/media-handle.dir/src/main/cpp/openSL_audio_player.c.o: C_COMPIL
 build CMakeFiles/media-handle.dir/src/main/cpp/video_player.c.o: C_COMPILER__media-handle ../../../../src/main/cpp/video_player.c
   DEFINES = -Dmedia_handle_EXPORTS
   DEP_FILE = CMakeFiles/media-handle.dir/src/main/cpp/video_player.c.o.d
-  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=15 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC
+  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC
   INCLUDES = -I../../../../src/main/cpp -I../../../../src/main/cpp/include
   IN_ABS = /Users/panbeixing/Documents/Project/Media/app/src/main/cpp/video_player.c
   OBJECT_DIR = CMakeFiles/media-handle.dir
@@ -118,7 +118,7 @@ build CMakeFiles/media-handle.dir/src/main/cpp/video_player.c.o: C_COMPILER__med
 build CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg_pusher.cpp.o: CXX_COMPILER__media-handle ../../../../src/main/cpp/ffmpeg_pusher.cpp
   DEFINES = -Dmedia_handle_EXPORTS
   DEP_FILE = CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg_pusher.cpp.o.d
-  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=15 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -std=gnu++11 -Os -DNDEBUG  -fPIC
+  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -std=gnu++11 -Os -DNDEBUG  -fPIC
   INCLUDES = -I../../../../src/main/cpp -I../../../../src/main/cpp/include -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward
   IN_ABS = /Users/panbeixing/Documents/Project/Media/app/src/main/cpp/ffmpeg_pusher.cpp
   OBJECT_DIR = CMakeFiles/media-handle.dir
@@ -126,7 +126,7 @@ build CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg_pusher.cpp.o: CXX_COMPILER
 build CMakeFiles/media-handle.dir/src/main/cpp/AVpacket_queue.c.o: C_COMPILER__media-handle ../../../../src/main/cpp/AVpacket_queue.c
   DEFINES = -Dmedia_handle_EXPORTS
   DEP_FILE = CMakeFiles/media-handle.dir/src/main/cpp/AVpacket_queue.c.o.d
-  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=15 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC
+  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC
   INCLUDES = -I../../../../src/main/cpp -I../../../../src/main/cpp/include
   IN_ABS = /Users/panbeixing/Documents/Project/Media/app/src/main/cpp/AVpacket_queue.c
   OBJECT_DIR = CMakeFiles/media-handle.dir
@@ -134,7 +134,7 @@ build CMakeFiles/media-handle.dir/src/main/cpp/AVpacket_queue.c.o: C_COMPILER__m
 build CMakeFiles/media-handle.dir/src/main/cpp/media_player.c.o: C_COMPILER__media-handle ../../../../src/main/cpp/media_player.c
   DEFINES = -Dmedia_handle_EXPORTS
   DEP_FILE = CMakeFiles/media-handle.dir/src/main/cpp/media_player.c.o.d
-  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=15 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC
+  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC
   INCLUDES = -I../../../../src/main/cpp -I../../../../src/main/cpp/include
   IN_ABS = /Users/panbeixing/Documents/Project/Media/app/src/main/cpp/media_player.c
   OBJECT_DIR = CMakeFiles/media-handle.dir
@@ -142,7 +142,7 @@ build CMakeFiles/media-handle.dir/src/main/cpp/media_player.c.o: C_COMPILER__med
 build CMakeFiles/media-handle.dir/src/main/cpp/video_filter.c.o: C_COMPILER__media-handle ../../../../src/main/cpp/video_filter.c
   DEFINES = -Dmedia_handle_EXPORTS
   DEP_FILE = CMakeFiles/media-handle.dir/src/main/cpp/video_filter.c.o.d
-  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=15 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC
+  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC
   INCLUDES = -I../../../../src/main/cpp -I../../../../src/main/cpp/include
   IN_ABS = /Users/panbeixing/Documents/Project/Media/app/src/main/cpp/video_filter.c
   OBJECT_DIR = CMakeFiles/media-handle.dir
@@ -150,7 +150,7 @@ build CMakeFiles/media-handle.dir/src/main/cpp/video_filter.c.o: C_COMPILER__med
 build CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg_audio_encoder_pure.cpp.o: CXX_COMPILER__media-handle ../../../../src/main/cpp/ffmpeg_audio_encoder_pure.cpp
   DEFINES = -Dmedia_handle_EXPORTS
   DEP_FILE = CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg_audio_encoder_pure.cpp.o.d
-  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=15 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -std=gnu++11 -Os -DNDEBUG  -fPIC
+  FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -std=gnu++11 -Os -DNDEBUG  -fPIC
   INCLUDES = -I../../../../src/main/cpp -I../../../../src/main/cpp/include -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward
   IN_ABS = /Users/panbeixing/Documents/Project/Media/app/src/main/cpp/ffmpeg_audio_encoder_pure.cpp
   OBJECT_DIR = CMakeFiles/media-handle.dir
@@ -163,9 +163,9 @@ build CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg_audio_encoder_pure.cpp.o: 
 #############################################
 # Link the shared library ../../../../build/intermediates/cmake/release/obj/armeabi-v7a/libmedia-handle.so
 
-build ../../../../build/intermediates/cmake/release/obj/armeabi-v7a/libmedia-handle.so: CXX_SHARED_LIBRARY_LINKER__media-handle CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg/cmdutils.c.o CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg/ffmpeg.c.o CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg/ffmpeg_filter.c.o CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg/ffmpeg_opt.c.o CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg_cmd.c.o CMakeFiles/media-handle.dir/src/main/cpp/audio_player.c.o CMakeFiles/media-handle.dir/src/main/cpp/openSL_audio_player.c.o CMakeFiles/media-handle.dir/src/main/cpp/video_player.c.o CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg_pusher.cpp.o CMakeFiles/media-handle.dir/src/main/cpp/AVpacket_queue.c.o CMakeFiles/media-handle.dir/src/main/cpp/media_player.c.o CMakeFiles/media-handle.dir/src/main/cpp/video_filter.c.o CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg_audio_encoder_pure.cpp.o | ../../../../libs/armeabi-v7a/libffmpeg.so /Users/panbeixing/Library/Android/sdk/ndk-bundle/platforms/android-15/arch-arm/usr/lib/liblog.so
-  LANGUAGE_COMPILE_FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=15 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -std=gnu++11 -Os -DNDEBUG
-  LINK_FLAGS = -Wl,--exclude-libs,libgcc.a -Wl,--exclude-libs,libatomic.a --sysroot /Users/panbeixing/Library/Android/sdk/ndk-bundle/platforms/android-15/arch-arm -Wl,--build-id -Wl,--warn-shared-textrel -Wl,--fatal-warnings -Wl,--fix-cortex-a8 -Wl,--no-undefined -Wl,-z,noexecstack -Qunused-arguments -Wl,-z,relro -Wl,-z,now
+build ../../../../build/intermediates/cmake/release/obj/armeabi-v7a/libmedia-handle.so: CXX_SHARED_LIBRARY_LINKER__media-handle CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg/cmdutils.c.o CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg/ffmpeg.c.o CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg/ffmpeg_filter.c.o CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg/ffmpeg_opt.c.o CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg_cmd.c.o CMakeFiles/media-handle.dir/src/main/cpp/audio_player.c.o CMakeFiles/media-handle.dir/src/main/cpp/openSL_audio_player.c.o CMakeFiles/media-handle.dir/src/main/cpp/video_player.c.o CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg_pusher.cpp.o CMakeFiles/media-handle.dir/src/main/cpp/AVpacket_queue.c.o CMakeFiles/media-handle.dir/src/main/cpp/media_player.c.o CMakeFiles/media-handle.dir/src/main/cpp/video_filter.c.o CMakeFiles/media-handle.dir/src/main/cpp/ffmpeg_audio_encoder_pure.cpp.o | ../../../../libs/armeabi-v7a/libffmpeg.so /Users/panbeixing/Library/Android/sdk/ndk-bundle/platforms/android-16/arch-arm/usr/lib/liblog.so
+  LANGUAGE_COMPILE_FLAGS = -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -std=gnu++11 -Os -DNDEBUG
+  LINK_FLAGS = -Wl,--exclude-libs,libgcc.a -Wl,--exclude-libs,libatomic.a --sysroot /Users/panbeixing/Library/Android/sdk/ndk-bundle/platforms/android-16/arch-arm -Wl,--build-id -Wl,--warn-shared-textrel -Wl,--fatal-warnings -Wl,--fix-cortex-a8 -Wl,--no-undefined -Wl,-z,noexecstack -Qunused-arguments -Wl,-z,relro -Wl,-z,now
   LINK_LIBRARIES = ../../../../libs/armeabi-v7a/libffmpeg.so -landroid -ljnigraphics -lOpenSLES -llog -latomic -lm "/Users/panbeixing/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/libgnustl_static.a"
   OBJECT_DIR = CMakeFiles/media-handle.dir
   POST_BUILD = :

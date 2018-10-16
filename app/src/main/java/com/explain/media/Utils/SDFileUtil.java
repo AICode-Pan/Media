@@ -23,6 +23,21 @@ import java.text.DecimalFormat;
 public class SDFileUtil {
     private static final String TAG = SDFileUtil.class.getName();
 
+    public static String getPCMPath() {
+        return getSDPath() + "/ARecord.pcm";
+    }
+
+    public static String getAACPath() {
+        return getSDPath() + "/MRecord.aac";
+    }
+
+    public static String getM4APath() {
+        return getSDPath() + "/MRecord.m4a";
+    }
+    /**
+     * 获取文件路径
+     * @return
+     */
     public static String getSDPath() {
         String sdDirPath = null;
         File sdDir = Environment.getExternalStorageDirectory();// 获取跟目录

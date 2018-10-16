@@ -28,7 +28,7 @@ public class MAudioRecorder {
     private static int audioFormat = AudioFormat.ENCODING_PCM_16BIT;
     private MediaRecorder mRecorder;
     //AudioName裸音频数据文件
-    private static final String AudioName = SDFileUtil.getSDPath() + "/MRecord.m4a";//不推荐这么写，可以用Enviroment.
+    private static final String AudioName = SDFileUtil.getAACPath();//不推荐这么写，可以用Enviroment.
 
     public void startRecord() {
         try {

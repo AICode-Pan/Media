@@ -21,7 +21,7 @@ ANDROID_ABI:UNINITIALIZED=armeabi-v7a
 ANDROID_NDK:UNINITIALIZED=/Users/panbeixing/Library/Android/sdk/ndk-bundle
 
 //No help, variable specified on the command line.
-ANDROID_PLATFORM:UNINITIALIZED=android-15
+ANDROID_PLATFORM:UNINITIALIZED=android-16
 
 //Archiver
 CMAKE_AR:FILEPATH=/Users/panbeixing/Library/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-ar
@@ -193,10 +193,10 @@ Project_BINARY_DIR:STATIC=/Users/panbeixing/Documents/Project/Media/app/.externa
 Project_SOURCE_DIR:STATIC=/Users/panbeixing/Documents/Project/Media/app
 
 //Path to a library.
-log-lib:FILEPATH=/Users/panbeixing/Library/Android/sdk/ndk-bundle/platforms/android-15/arch-arm/usr/lib/liblog.so
+log-lib:FILEPATH=/Users/panbeixing/Library/Android/sdk/ndk-bundle/platforms/android-16/arch-arm/usr/lib/liblog.so
 
 //Dependencies for the target
-media-handle_LIB_DEPENDS:STATIC=general;ffmpeg;general;-landroid;general;-ljnigraphics;general;-lOpenSLES;general;/Users/panbeixing/Library/Android/sdk/ndk-bundle/platforms/android-15/arch-arm/usr/lib/liblog.so;
+media-handle_LIB_DEPENDS:STATIC=general;ffmpeg;general;-landroid;general;-ljnigraphics;general;-lOpenSLES;general;/Users/panbeixing/Library/Android/sdk/ndk-bundle/platforms/android-16/arch-arm/usr/lib/liblog.so;
 
 
 ########################

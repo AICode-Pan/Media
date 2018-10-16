@@ -1,6 +1,7 @@
 package com.explain.media.audio.activity;
 
 import android.app.Activity;
+import android.media.MediaFormat;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.FrameLayout;
 import com.explain.media.R;
 import com.explain.media.Utils.FFmpegCmd;
 import com.explain.media.Utils.SDFileUtil;
+import com.explain.media.audio.encode.AudioEncode;
 import com.explain.media.audio.record.AudioRecorder;
 
 /**
@@ -44,7 +46,11 @@ public class AudioEncodeActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Log.i(TAG, "execute pcm to aac");
-                FFmpegCmd.execute(SDFileUtil.getSDPath() + "/ARecord.pcm" , SDFileUtil.getSDPath() + "/ATest.aac");
+                AudioEncode audioEncode = new AudioEncode();
+                audioEncode.setEncodeType(MediaFormat.MIMETYPE_AUDIO_AAC);
+                audioEncode.setIOPath(SDFileUtil.getPCMPath(), SDFileUtil.getAACPath());
+                audioEncode.prepare();
+                audioEncode.startAsync();
             }
         });
     }
