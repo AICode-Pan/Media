@@ -191,17 +191,16 @@ public class AudioEncode {
             public void run() {
                 try {
                     File file = new File(srcPath);
-                    FileInputStream fis = new FileInputStream(file);
-                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                    FileInputStream fileIS = new FileInputStream(file);
+                    ByteArrayOutputStream byteAyyayOPS = new ByteArrayOutputStream();
                     byte[] b = new byte[1024];
                     int n;
-                    while ((n = fis.read(b)) != -1) {
-                        bos.write(b, 0, n);
-                        encodeData(bos.toByteArray());
-                        bos.reset();
+                    while ((n = fileIS.read(b)) != -1) {
+                        byteAyyayOPS.write(b, 0, n);
+                        encodeData(byteAyyayOPS.toByteArray());
+                        byteAyyayOPS.reset();
                     }
-                    encodeData(bos.toByteArray());
-                    fis.close();
+                    fileIS.close();
                     bos.close();
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -210,30 +209,6 @@ public class AudioEncode {
                 }
             }
         }).start();
-    }
-
-    private void PCMFile2byte(String filePath) {
-        try {
-            File file = new File(filePath);
-            FileInputStream fis = new FileInputStream(file);
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            byte[] b = new byte[1024];
-            int n;
-            while ((n = fis.read(b)) != -1) {
-                bos.write(b, 0, n);
-                if (bos.size() >= 1024 * 100) {
-                    putPCMData(bos.toByteArray());
-                    bos.reset();
-                }
-                putPCMData(bos.toByteArray());
-            }
-            fis.close();
-            bos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -368,6 +343,10 @@ public class AudioEncode {
         }
     }
 
+    /**
+     * 编码，得到{@link #encodeType}格式的音频文件，并保存到{@link #dstPath}
+     * @param data
+     */
     public void encodeData(byte[] data){
         //dequeueInputBuffer（time）需要传入一个时间值，-1表示一直等待，0表示不等待有可能会丢帧，其他表示等待多少毫秒
         int inputIndex = mediaEncode.dequeueInputBuffer(-1);//获取输入缓存的index
