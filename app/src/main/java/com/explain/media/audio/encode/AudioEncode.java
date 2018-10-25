@@ -43,6 +43,7 @@ public class AudioEncode {
     private FileOutputStream fos;
     private BufferedOutputStream bos;
     private ArrayList<byte[]> chunkPCMDataContainer;//PCM数据块容器
+    private boolean needDecode = false;
 
     /**
      * 设置编码器类型
@@ -90,6 +91,16 @@ public class AudioEncode {
         }
         chunkPCMDataContainer = new ArrayList<>();
 
+        if (srcPath.endsWith("pcm")) {
+            needDecode = false;
+        } else {
+            needDecode = true;
+        }
+
+        if (needDecode) {
+            initMediaDecode();
+        }
+
         switch (encodeType) {
             case MediaFormat.MIMETYPE_AUDIO_AAC:
                 initAACMediaEncode();//AAC编码器
@@ -98,6 +109,8 @@ public class AudioEncode {
                 initMPEGMediaEncode();//mp3编码器
                 break;
         }
+
+
     }
 
     /**
@@ -110,9 +123,12 @@ public class AudioEncode {
             for (int i = 0; i < mediaExtractor.getTrackCount(); i++) {//遍历媒体轨道 此处我们传入的是音频文件，所以也就只有一条轨道
                 MediaFormat format = mediaExtractor.getTrackFormat(i);
                 String mime = format.getString(MediaFormat.KEY_MIME);
+                //用来表示媒体文件的格式 mp3为audio/mpeg；aac为audio/mp4a-latm；mp4为video/mp4v-es
+                //此处注意前缀 音频前缀为audio，视频前缀为video 我们可用此区别区分媒体文件内的音频轨道和视频轨道
+                //mime的各种类型定义在MediaFormat静态常量中
                 if (mime.startsWith("audio")) {//获取音频轨道
                     mediaExtractor.selectTrack(i);//选择此音频轨道
-                    mediaDecode = MediaCodec.createDecoderByType(mime);//创建Decode解码器
+                    mediaDecode = MediaCodec.createDecoderByType(mime);//创建对应格式的Decode解码器
                     mediaDecode.configure(format, null, null, 0);
                     break;
                 }
@@ -129,7 +145,6 @@ public class AudioEncode {
         decodeInputBuffers = mediaDecode.getInputBuffers();//MediaCodec在此ByteBuffer[]中获取输入数据
         decodeOutputBuffers = mediaDecode.getOutputBuffers();//MediaCodec将解码后的数据放到此ByteBuffer[]中 我们可以直接在这里面得到PCM数据
         decodeBufferInfo = new MediaCodec.BufferInfo();//用于描述解码得到的byte[]数据的相关信息
-        Log.i(TAG, "buffers:" + decodeInputBuffers.length);
     }
 
 
@@ -141,8 +156,8 @@ public class AudioEncode {
             MediaFormat encodeFormat = MediaFormat.createAudioFormat(encodeType, 44100, 2);//参数对应-> mime type、采样率、声道数
             encodeFormat.setInteger(MediaFormat.KEY_BIT_RATE, 44100);//比特率
             encodeFormat.setInteger(MediaFormat.KEY_AAC_PROFILE, MediaCodecInfo.CodecProfileLevel.AACObjectLC);
-            encodeFormat.setInteger(MediaFormat.KEY_MAX_INPUT_SIZE, 1024 * 1024);
-            encodeFormat.setInteger(MediaFormat.KEY_CHANNEL_COUNT, 2);
+            encodeFormat.setInteger(MediaFormat.KEY_MAX_INPUT_SIZE, 100 * 1024);
+//            encodeFormat.setInteger(MediaFormat.KEY_CHANNEL_COUNT, 2);
             mediaEncode = MediaCodec.createEncoderByType(MediaFormat.MIMETYPE_AUDIO_AAC);
             mediaEncode.configure(encodeFormat, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE);
         } catch (IOException e) {
@@ -176,39 +191,11 @@ public class AudioEncode {
      */
     public void startAsync() {
         Log.i(TAG, "start");
-
-//        if (srcPath.endsWith("pcm")) {
-//            PCMFile2byte(srcPath);
-//        } else {
-//            initMediaDecode();
-//            new Thread(new DecodeRunnable()).start();
-//        }
-//        new Thread(new EncodeRunnable()).start();
-
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    File file = new File(srcPath);
-                    FileInputStream fileIS = new FileInputStream(file);
-                    ByteArrayOutputStream byteAyyayOPS = new ByteArrayOutputStream();
-                    byte[] b = new byte[1024];
-                    int n;
-                    while ((n = fileIS.read(b)) != -1) {
-                        byteAyyayOPS.write(b, 0, n);
-                        encodeData(byteAyyayOPS.toByteArray());
-                        byteAyyayOPS.reset();
-                    }
-                    fileIS.close();
-                    bos.close();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+        Log.i(TAG, "needDecode ： " + needDecode);
+        if (needDecode) {
+            new Thread(new DecodeRunnable()).start();
+        }
+        new Thread(new EncodeRunnable()).start();
     }
 
     /**
@@ -246,7 +233,7 @@ public class AudioEncode {
      *
      * @return 是否解码完所有数据
      */
-    private void srcAudioFormatToPCM() {
+    private void decodeAudioFormatToPCM() {
         for (int i = 0; i < decodeInputBuffers.length - 1; i++) {
             int inputIndex = mediaDecode.dequeueInputBuffer(-1);//获取可用的inputBuffer -1代表一直等待，0表示不等待 建议-1,避免丢帧
             if (inputIndex < 0) {
@@ -255,6 +242,7 @@ public class AudioEncode {
             }
 
             ByteBuffer inputBuffer = decodeInputBuffers[inputIndex];//拿到inputBuffer
+            Log.i(TAG, TAG + ".decodeAudioFormatToPCM inputBuffer : " + inputBuffer);
             inputBuffer.clear();//清空之前传入inputBuffer内的数据
             int sampleSize = mediaExtractor.readSampleData(inputBuffer, 0);//MediaExtractor读取数据到inputBuffer中
             if (sampleSize < 0) {//小于0 代表所有数据已读取完成
@@ -269,85 +257,55 @@ public class AudioEncode {
         //此处建议不要填-1 有些时候并没有数据输出，那么他就会一直卡在这 等待
         int outputIndex = mediaDecode.dequeueOutputBuffer(decodeBufferInfo, 10000);
 
-        //        showLog("decodeOutIndex:" + outputIndex);
         ByteBuffer outputBuffer;
         byte[] chunkPCM;
+        Log.i(TAG, TAG + ".decodeAudioFormatToPCM outputIndex : " + outputIndex);
         while (outputIndex >= 0) {//每次解码完成的数据不一定能一次吐出 所以用while循环，保证解码器吐出所有数据
             outputBuffer = decodeOutputBuffers[outputIndex];//拿到用于存放PCM数据的Buffer
-            chunkPCM = new byte[decodeBufferInfo.size];//BufferInfo内定义了此数据块的大小
+            chunkPCM = new byte[outputBuffer.limit()];//BufferInfo内定义了此数据块的大小
+            Log.i(TAG, TAG + ".decodeAudioFormatToPCM outputBuffer : " + outputBuffer);
             outputBuffer.get(chunkPCM);//将Buffer内的数据取出到字节数组中
             outputBuffer.clear();//数据取出后一定记得清空此Buffer MediaCodec是循环使用这些Buffer的，不清空下次会得到同样的数据
+
             putPCMData(chunkPCM);//自己定义的方法，供编码器所在的线程获取数据,下面会贴出代码
             mediaDecode.releaseOutputBuffer(outputIndex, false);//此操作一定要做，不然MediaCodec用完所有的Buffer后 将不能向外输出数据
             outputIndex = mediaDecode.dequeueOutputBuffer(decodeBufferInfo, 10000);//再次获取数据，如果没有数据输出则outputIndex=-1 循环结束
         }
-
     }
 
     /**
-     * 编码PCM数据 得到{@link #encodeType}格式的音频文件，并保存到{@link #dstPath}
+     * 将pcm文件转换为二进制数据
      */
-    private void dstAudioFormatFromPCM() {
-
-        int inputIndex;
-        ByteBuffer inputBuffer;
-        int outputIndex;
-        ByteBuffer outputBuffer;
-        byte[] chunkAudio;
-        int outBitSize;
-        int outPacketSize;
-        byte[] chunkPCM;
-
-        for (int i = 0; i < encodeInputBuffers.length - 1; i++) {
-            chunkPCM = getPCMData();//获取解码器所在线程输出的数据 代码后边会贴上
-            if (chunkPCM == null) {
-                Log.i(TAG, TAG + ".dstAudioFormatFromPCM is null");
-                break;
+    private void encodePCM2Data() {
+        try {
+            File file = new File(srcPath);
+            FileInputStream fileIS = new FileInputStream(file);
+            ByteArrayOutputStream byteAyyayOPS = new ByteArrayOutputStream();
+            byte[] b = new byte[1024];
+            int n;
+            while ((n = fileIS.read(b)) != -1) {
+                byteAyyayOPS.write(b, 0, n);
+                encodeData(byteAyyayOPS.toByteArray());
+                byteAyyayOPS.reset();
             }
-            inputIndex = mediaEncode.dequeueInputBuffer(-1);//同解码器
-            Log.i(TAG, TAG + ".dstAudioFormatFromPCM inputIndex is " + inputIndex);
-            inputBuffer = encodeInputBuffers[inputIndex];//同解码器
-            inputBuffer.clear();//同解码器
-            inputBuffer.limit(chunkPCM.length);
-            inputBuffer.put(chunkPCM);//PCM数据填充给inputBuffer
-            mediaEncode.queueInputBuffer(inputIndex, 0, chunkPCM.length, 0, 0);//通知编码器 编码
-        }
-
-        outputIndex = mediaEncode.dequeueOutputBuffer(encodeBufferInfo, 10000);
-        Log.i(TAG, TAG + ".dstAudioFormatFromPCM outputIndex is " + outputIndex);
-
-        while (outputIndex >= 0) {
-
-            outBitSize = encodeBufferInfo.size;
-            outPacketSize = outBitSize + 7;//7为ADTS头部的大小
-            outputBuffer = encodeOutputBuffers[outputIndex];//拿到输出Buffer
-            outputBuffer.position(encodeBufferInfo.offset);
-            outputBuffer.limit(encodeBufferInfo.offset + outBitSize);
-            chunkAudio = new byte[outPacketSize];
-            addADTStoPacket(chunkAudio, outPacketSize);//添加ADTS头
-            outputBuffer.get(chunkAudio, 7, outBitSize);//将编码得到的AAC数据 取出到byte[]中 偏移量offset=7
-            outputBuffer.position(encodeBufferInfo.offset);
-            //                showLog("outPacketSize:" + outPacketSize + " encodeOutBufferRemain:" + outputBuffer.remaining());
-            try {
-                bos.write(chunkAudio, 0, chunkAudio.length);//BufferOutputStream 将文件保存到内存卡中 *.aac
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            mediaEncode.releaseOutputBuffer(outputIndex, false);
-            outputIndex = mediaEncode.dequeueOutputBuffer(encodeBufferInfo, 10000);
-        }
-
-        if (outputIndex == -1) {
-            codeOver = true;
+            fileIS.close();
+            byteAyyayOPS.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
     /**
      * 编码，得到{@link #encodeType}格式的音频文件，并保存到{@link #dstPath}
+     *
      * @param data
      */
-    public void encodeData(byte[] data){
+    private void encodeData(byte[] data) {
+        if (data == null) {
+            return;
+        }
         //dequeueInputBuffer（time）需要传入一个时间值，-1表示一直等待，0表示不等待有可能会丢帧，其他表示等待多少毫秒
         int inputIndex = mediaEncode.dequeueInputBuffer(-1);//获取输入缓存的index
         if (inputIndex >= 0) {
@@ -365,18 +323,18 @@ public class AudioEncode {
             //添加ADTS头部后的长度
             int bytePacketSize = byteBufSize + 7;
             //拿到输出Buffer
-            ByteBuffer  outPutBuf = encodeOutputBuffers[outputIndex];
+            ByteBuffer outPutBuf = encodeOutputBuffers[outputIndex];
             outPutBuf.position(encodeBufferInfo.offset);
-            outPutBuf.limit(encodeBufferInfo.offset+encodeBufferInfo.size);
+            outPutBuf.limit(encodeBufferInfo.offset + encodeBufferInfo.size);
 
-            byte[]  targetByte = new byte[bytePacketSize];
+            byte[] targetByte = new byte[bytePacketSize];
             //添加ADTS头部
             addADTStoPacket(targetByte, bytePacketSize);
             /*
             get（byte[] dst,int offset,int length）:ByteBuffer从position位置开始读，读取length个byte，并写入dst下
             标从offset到offset + length的区域
              */
-            outPutBuf.get(targetByte,7,byteBufSize);
+            outPutBuf.get(targetByte, 7, byteBufSize);
 
             outPutBuf.position(encodeBufferInfo.offset);
 
@@ -386,7 +344,7 @@ public class AudioEncode {
                 e.printStackTrace();
             }
             //释放
-            mediaEncode.releaseOutputBuffer(outputIndex,false);
+            mediaEncode.releaseOutputBuffer(outputIndex, false);
             outputIndex = mediaEncode.dequeueOutputBuffer(encodeBufferInfo, 0);
         }
     }
@@ -472,7 +430,7 @@ public class AudioEncode {
         @Override
         public void run() {
             while (!codeOver) {
-                srcAudioFormatToPCM();
+                decodeAudioFormatToPCM();
             }
         }
     }
@@ -485,8 +443,13 @@ public class AudioEncode {
         @Override
         public void run() {
             long t = System.currentTimeMillis();
-            while (!codeOver) {
-                dstAudioFormatFromPCM();
+            if (needDecode) {
+                while (!codeOver) {
+                    encodeData(getPCMData());
+//                    dstAudioFormatFromPCM();
+                }
+            } else {
+                encodePCM2Data();
             }
             Log.i(TAG, "Encode Success time : " + (System.currentTimeMillis() - t));
         }

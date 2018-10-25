@@ -28,6 +28,8 @@ import com.explain.media.audio.record.AudioRecorder;
 public class AudioEncodeActivity extends Activity {
     private static final String TAG = AudioEncodeActivity.class.getSimpleName();
     private Button button;
+
+    private AudioEncode audioEncode;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,12 +48,19 @@ public class AudioEncodeActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Log.i(TAG, "execute pcm to aac");
-                AudioEncode audioEncode = new AudioEncode();
+                audioEncode = new AudioEncode();
                 audioEncode.setEncodeType(MediaFormat.MIMETYPE_AUDIO_AAC);
-                audioEncode.setIOPath(SDFileUtil.getPCMPath(), SDFileUtil.getAACPath());
+//                audioEncode.setIOPath(SDFileUtil.getSDPath() + "/gemgnzw.mp3", SDFileUtil.getAACPath());
+                audioEncode.setIOPath(SDFileUtil.getSDPath() + "/ARecord.pcm", SDFileUtil.getSDPath() + "/AudioEncode.aac");
                 audioEncode.prepare();
                 audioEncode.startAsync();
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        audioEncode.release();
     }
 }
