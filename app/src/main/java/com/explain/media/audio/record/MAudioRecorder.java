@@ -3,10 +3,9 @@ package com.explain.media.audio.record;
 import android.media.AudioFormat;
 import android.media.MediaRecorder;
 
-import com.explain.media.Utils.SDFileUtil;
+import com.explain.media.utils.SDFileUtil;
 
 import java.io.File;
-import java.io.IOException;
 
 /**
  * <pre>

@@ -1,4 +1,4 @@
-package com.explain.media.Utils;
+package com.explain.media.utils;
 
 import android.util.Log;
 

@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.explain.media.R;
-import com.explain.media.Utils.SDFileUtil;
+import com.explain.media.utils.SDFileUtil;
 
 import java.io.File;
 import java.io.IOException;

@@ -4,7 +4,7 @@ import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 
-import com.explain.media.Utils.SDFileUtil;
+import com.explain.media.utils.SDFileUtil;
 
 import java.io.File;
 import java.io.FileInputStream;

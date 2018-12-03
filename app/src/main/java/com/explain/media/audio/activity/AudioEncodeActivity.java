@@ -5,16 +5,12 @@ import android.media.MediaFormat;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
-import com.explain.media.R;
-import com.explain.media.Utils.FFmpegCmd;
-import com.explain.media.Utils.SDFileUtil;
+import com.explain.media.utils.SDFileUtil;
 import com.explain.media.audio.encode.AudioEncode;
-import com.explain.media.audio.record.AudioRecorder;
 
 /**
  * <pre>
