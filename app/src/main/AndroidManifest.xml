@@ -3,6 +3,12 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- 声明必须有相机的设备才允许安装 -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:name=".CoreApplication"
@@ -18,9 +24,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".audio.activity.ARecordActivity"/>
-        <activity android:name=".audio.activity.MRecordActivity"/>
-        <activity android:name=".audio.activity.AudioPlayActivity"/>
-        <activity android:name=".audio.activity.AudioEncodeActivity"/>
+        <activity android:name=".activity.AudioHandleActivity"/>
+        <activity android:name=".activity.VideoHandleActivity"/>
+        <activity android:name=".activity.RecordHandleActivity" />
+
+        <activity android:name=".activity.ARecordActivity"/>
+        <activity android:name=".activity.MRecordActivity"/>
+        <activity android:name=".activity.AudioPlayActivity"/>
+        <activity android:name=".activity.AudioEncodeActivity"/>
     </application>
 </manifest>

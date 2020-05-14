@@ -1,4 +1,4 @@
-package com.explain.media.audio.activity;
+package com.explain.media.activity;
 
 import android.app.Activity;
 import android.content.Intent;

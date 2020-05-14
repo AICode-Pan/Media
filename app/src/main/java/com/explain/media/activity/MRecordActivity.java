@@ -1,4 +1,4 @@
-package com.explain.media.audio.activity;
+package com.explain.media.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -9,26 +9,24 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
-import com.explain.media.audio.record.AudioRecorder;
+import com.explain.media.audio.record.MAudioRecorder;
 import com.explain.media.R;
 
 /**
  * <pre>
  *     author : panbeixing
  *     time : 2018/9/20
- *     desc : AudioRecord录制音频
+ *     desc :
  *     version : 1.0
  * </pre>
  */
 
-public class ARecordActivity extends Activity {
-    private AudioRecorder audioRecorder;
-
+public class MRecordActivity extends Activity {
     private Button button;
+    private MAudioRecorder mediaRecorder;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(140,
                 140);
         lp.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
@@ -44,15 +42,9 @@ public class ARecordActivity extends Activity {
 
         setContentView(layout);
 
-        audioRecorder = new AudioRecorder();
+        mediaRecorder = new MAudioRecorder();
 
         button.setOnTouchListener(new TouchListener());
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        audioRecorder.release();
     }
 
     /**
@@ -63,10 +55,10 @@ public class ARecordActivity extends Activity {
         public boolean onTouch(View v, MotionEvent event) {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    audioRecorder.startRecord();
+                    mediaRecorder.startRecord();
                     break;
                 case MotionEvent.ACTION_UP:
-                    audioRecorder.stopRecord();
+                    mediaRecorder.stopRecord();
                     break;
                 case MotionEvent.ACTION_MOVE:
                     break;
