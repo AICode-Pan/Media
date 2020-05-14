@@ -1,4 +1,6 @@
 # Android 音视频学习
+好久没更新了，最近需要打乱重新学习。有需要的果断时间再来取吧
+
 [Android 音视频之音频入门](https://www.jianshu.com/p/916813e847d3)<br/>
 [Android 音视频之音频编码](https://www.jianshu.com/p/e2dcbdfdf97e)<br/>
 [Android 音视频之音频录制](https://www.jianshu.com/p/0dc3ce1ed626)<br/>
