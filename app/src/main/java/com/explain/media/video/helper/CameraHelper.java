@@ -14,11 +14,13 @@ import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CaptureRequest;
+import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.Image;
 import android.media.ImageReader;
 import android.os.Build;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
@@ -27,6 +29,8 @@ import android.util.SparseIntArray;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.widget.Toast;
+
+import com.explain.media.listener.RecordLisnter;
 
 import java.nio.ByteBuffer;
 import java.util.Arrays;
@@ -41,16 +45,21 @@ public class CameraHelper {
 
     private CameraManager mCameraManager;//摄像头管理器
     private Handler mainHandler;
-    private String mCameraID;//摄像头Id 0 为后  1 为前
+    private int mCameraID;//摄像头Id 0 为后  1 为前
     private CameraCaptureSession mCameraCaptureSession;
     private CameraDevice mCameraDevice;
+    //CameraCharacteristics相机信息提供者
+    //其内部携带大量的相机信息，包括代表相机朝向的 LENS_FACING；判断闪光灯是否可用的 FLASH_INFO_AVAILABLE；获取所有可用 AE 模式的 CONTROL_AE_AVAILABLE_MODES 等等
+    private CameraCharacteristics cameraCharacteristics;
 
     private Context context;
+    private RecordLisnter recordLisnter;
     private int rotation;
     private Surface surface;
     private int screenWidth;
     private int screenHeight;
-    private final SparseIntArray ORIENTATIONS = new SparseIntArray();
+    //ImageReader 是获取图像数据的一个重要途径，我们可以通过它获取各种各样格式的图像数据，例如 JPEG、YUV 和 RAW 等等。
+    private ImageReader imageReader;
 
     private CameraHelper(Builder builder) {
         context = builder.context;
@@ -69,16 +78,24 @@ public class CameraHelper {
      */
     private void initCamera() {
         mainHandler = new Handler(context.getMainLooper());
-        mCameraID = "" + CameraCharacteristics.LENS_FACING_FRONT;//后摄像头
+        mCameraID = CameraCharacteristics.LENS_FACING_FRONT;//后摄像头
 
         //获取摄像头管理
         mCameraManager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
+        initCameraCharacteristics();
 
-        //为了使照片竖直显示
-        ORIENTATIONS.append(Surface.ROTATION_0, 0);
-        ORIENTATIONS.append(Surface.ROTATION_90, 90);
-        ORIENTATIONS.append(Surface.ROTATION_180, 180);
-        ORIENTATIONS.append(Surface.ROTATION_270, 270);
+        imageReader = ImageReader.newInstance(screenWidth, screenHeight, ImageFormat.JPEG, 1);
+    }
+
+    /**
+     * 初始化CameraCharacteristics对象。
+     */
+    private void initCameraCharacteristics() {
+        try {
+            cameraCharacteristics = mCameraManager.getCameraCharacteristics(String.valueOf(mCameraID));
+        } catch (CameraAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -109,6 +126,30 @@ public class CameraHelper {
     };
 
     /**
+     * 设置录制监听
+     *
+     * @param lisnter
+     */
+    public void setRecordLisnter(RecordLisnter lisnter) {
+        this.recordLisnter = lisnter;
+    }
+
+    /**
+     * 切换摄像头
+     */
+    public void switchCamera() {
+        if (mCameraID == CameraCharacteristics.LENS_FACING_FRONT) {
+            mCameraID = CameraCharacteristics.LENS_FACING_BACK;
+        } else {
+            mCameraID = CameraCharacteristics.LENS_FACING_FRONT;
+        }
+
+        closeCamera();
+        initCameraCharacteristics();
+        openCamera();
+    }
+
+    /**
      * 打开摄像头
      */
     public void openCamera() {
@@ -118,7 +159,7 @@ public class CameraHelper {
             } else {
                 //打开摄像头
                 Log.i(TAG, "CameraManager.openCamera");
-                mCameraManager.openCamera(mCameraID, stateCallback, mainHandler);
+                mCameraManager.openCamera(String.valueOf(mCameraID), stateCallback, mainHandler);
             }
         } catch (CameraAccessException e) {
             e.printStackTrace();
@@ -128,28 +169,22 @@ public class CameraHelper {
     }
 
     /**
-     * 获取预览尺寸
+     * 获取可以支持的预览尺寸
      */
     public <T> Size getSupportedPreviewSizes(Class<T> tClass, int maxWidth, int maxHeight) {
-        try {
-            float aspectRatio = ((float) maxWidth) / maxHeight;
-            Log.i(TAG, TAG + ".getSupportedPreviewSizes aspectRatio=" + aspectRatio);
-            CameraCharacteristics cameraCharacteristics = mCameraManager.getCameraCharacteristics(mCameraID);
-            StreamConfigurationMap streamConfigurationMap =  cameraCharacteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
-            Size[] supportedSizes = streamConfigurationMap.getOutputSizes(tClass);
-            Log.i(TAG, TAG + ".getSupportedPreviewSizes supportedSize=" + supportedSizes.length);
-            for (int i = 0 ; i < supportedSizes.length ; i++) {
-                Size size = supportedSizes[i];
-                Log.i(TAG, TAG + ".getSupportedPreviewSizes width=" + size.getWidth() + " height=" + size.getHeight());
-                if (((float) size.getHeight()) / size.getWidth() == aspectRatio) {
-                    return size;
-                }
+        float aspectRatio = ((float) maxWidth) / maxHeight;
+        Log.i(TAG, TAG + ".getSupportedPreviewSizes aspectRatio=" + aspectRatio);
+        StreamConfigurationMap streamConfigurationMap = cameraCharacteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
+        Size[] supportedSizes = streamConfigurationMap.getOutputSizes(tClass);
+        Log.i(TAG, TAG + ".getSupportedPreviewSizes supportedSize=" + supportedSizes.length);
+        for (int i = 0; i < supportedSizes.length; i++) {
+            Size size = supportedSizes[i];
+            Log.i(TAG, TAG + ".getSupportedPreviewSizes width=" + size.getWidth() + " height=" + size.getHeight());
+            if (((float) size.getHeight()) / size.getWidth() == aspectRatio) {
+                return size;
             }
-            return null;
-        } catch (CameraAccessException e) {
-            e.printStackTrace();
-            return null;
         }
+        return null;
     }
 
     /**
@@ -160,13 +195,21 @@ public class CameraHelper {
     }
 
     /**
+     * 关闭相机
+     */
+    private void closeCamera() {
+        if (null != mCameraDevice) {
+            mCameraDevice.close();
+        }
+    }
+
+    /**
      * 释放Camera资源
      */
     public void close() {
-        if (null != mCameraDevice) {
-            mCameraDevice.close();
-            mCameraDevice = null;
-        }
+        closeCamera();
+        mCameraDevice = null;
+
     }
 
     /**
@@ -181,8 +224,7 @@ public class CameraHelper {
             // 将SurfaceView的surface作为CaptureRequest.Builder的目标
             previewRequestBuilder.addTarget(surface);
             // 创建CameraCaptureSession，该对象负责管理处理预览请求和拍照请求
-            mCameraDevice.createCaptureSession(Arrays.asList(surface), new CameraCaptureSession.StateCallback()
-            {
+            mCameraDevice.createCaptureSession(Arrays.asList(surface, imageReader.getSurface()), new CameraCaptureSession.StateCallback() {
                 @Override
                 public void onConfigured(CameraCaptureSession cameraCaptureSession) {
                     if (null == mCameraDevice) return;
@@ -217,19 +259,17 @@ public class CameraHelper {
      * capture() 是获取一次，常用于单张拍照。
      */
     public void takePicture() {
-        // 创建拍照需要的CaptureRequest.Builder
-        final CaptureRequest.Builder captureRequestBuilder;
         try {
-            ImageReader imageReader = ImageReader.newInstance(screenWidth, screenHeight, ImageFormat.JPEG, 1);
-            captureRequestBuilder = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);
+            // 创建拍照需要的CaptureRequest.Builder
+            CaptureRequest.Builder captureRequestBuilder = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);
             // 将imageReader的surface作为CaptureRequest.Builder的目标
             captureRequestBuilder.addTarget(imageReader.getSurface());
             // 自动对焦
             captureRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
-            // 自动曝光
+            // 自动曝光，闪光灯
             captureRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH);
             // 根据设备方向计算设置照片的方向
-            captureRequestBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation));
+            captureRequestBuilder.set(CaptureRequest.JPEG_ORIENTATION, getJpegOrientation(cameraCharacteristics, rotation));
             //拍照
             CaptureRequest mCaptureRequest = captureRequestBuilder.build();
             mCameraCaptureSession.capture(mCaptureRequest, null, mainHandler);
@@ -240,17 +280,53 @@ public class CameraHelper {
                 public void onImageAvailable(ImageReader reader) {
 //                mCameraDevice.close();
                     // 拿到拍照照片数据
+                    // 通过调用 Image.getPlanes() 方法获取所有的 Plane 对象的数组，最后通过 Plane.getBuffer() 获取每一个 Plane 里存储的图像数据。
                     Image image = reader.acquireNextImage();
                     ByteBuffer buffer = image.getPlanes()[0].getBuffer();
                     byte[] bytes = new byte[buffer.remaining()];
                     buffer.get(bytes);//由缓冲区存入字节数组
+                    image.close();
                     final Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-
+                    if (recordLisnter != null) {
+                        recordLisnter.onTakePicture(bitmap);
+                    }
                 }
             }, mainHandler);
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 为了使照片竖直显示,获取图片的方向
+     * 在进行图片方向矫正的时候，我们的目的是做到所见即所得，也就是用户在预览画面里看到的是什么样，输出的图片就是什么样。
+     * 为了做到图片所见即所得，我们要同时考虑设备方向和摄像头传感器方向。
+     * 下面是一段来自官方的图片矫正代码
+     */
+    private int getJpegOrientation(CameraCharacteristics cameraCharacteristics, int deviceOrientation) {
+        int myDeviceOrientation = deviceOrientation;
+        if (myDeviceOrientation == android.view.OrientationEventListener.ORIENTATION_UNKNOWN) {
+            return 0;
+        }
+
+        if (cameraCharacteristics == null) {
+            return 0;
+        }
+
+        int sensorOrientation = cameraCharacteristics.get(CameraCharacteristics.SENSOR_ORIENTATION);
+
+        // Round device orientation to a multiple of 90
+        myDeviceOrientation = (myDeviceOrientation + 45) / 90 * 90;
+
+        // Reverse device orientation for front-facing cameras
+//        boolean facingFront = cameraCharacteristics.get(CameraCharacteristics.LENS_FACING) == CameraCharacteristics.LENS_FACING_FRONT;
+//        if (facingFront) {
+//            sensorOrientation = -sensorOrientation;
+//        }
+
+        // Calculate desired JPEG orientation relative to camera orientation to make
+        // the image upright relative to the device orientation
+        return (sensorOrientation + myDeviceOrientation + 360) % 360;
     }
 
     /**

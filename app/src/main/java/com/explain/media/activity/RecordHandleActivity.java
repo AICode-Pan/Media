@@ -4,9 +4,9 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.SurfaceTexture;
-import android.opengl.GLSurfaceView;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,26 +16,27 @@ import android.util.Log;
 import android.util.Size;
 import android.view.Display;
 import android.view.Surface;
-import android.view.SurfaceHolder;
 import android.view.TextureView;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.explain.media.R;
+import com.explain.media.listener.RecordLisnter;
 import com.explain.media.video.helper.CameraHelper;
-
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.opengles.GL10;
 
 /**
  * 视频实时处理
  */
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 @SuppressLint("NewApi")
-public class RecordHandleActivity extends Activity {
+public class RecordHandleActivity extends Activity implements View.OnClickListener {
     private static final String TAG = "RecordHandleActivity";
 
     private TextureView textureView;
     private SurfaceTexture surfaceTexture;
     private CameraHelper cameraHelper;
+    private ImageView ivRecord;
+    private ImageView ivPicture;
     public static final int REQUEST_CAMERA_CODE = 100;
 
 
@@ -45,6 +46,11 @@ public class RecordHandleActivity extends Activity {
         Log.i(TAG, TAG + ".onCreate");
         setContentView(R.layout.activity_record_handle);
         textureView = findViewById(R.id.textureview);
+        ivRecord = findViewById(R.id.iv_record);
+        ivPicture = findViewById(R.id.iv_picture);
+        ivPicture.setOnClickListener(this);
+
+        ivRecord.setOnClickListener(this);
         textureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
             @Override
             public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
@@ -75,6 +81,36 @@ public class RecordHandleActivity extends Activity {
 
     }
 
+    @SuppressLint("NewApi")
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CAMERA_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                startPreview();
+            } else {
+                finish();
+            }
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_record:
+                if (cameraHelper != null) {
+                    cameraHelper.takePicture();
+                }
+                break;
+            case R.id.iv_picture:
+                if (cameraHelper != null) {
+                    cameraHelper.switchCamera();
+                }
+                break;
+        }
+    }
+
     /**
      * 开始预览
      */
@@ -91,6 +127,8 @@ public class RecordHandleActivity extends Activity {
             defaultDisplay.getSize(point);
             int width = point.x;
             int height = point.y;
+            Log.i(TAG, TAG + ".startPreview gRotation=" + defaultDisplay.getRotation());
+            Log.i(TAG, TAG + ".startPreview screenWidth=" + width + " screenHeight=" + height);
 
             cameraHelper = new CameraHelper.Builder()
                     .with(RecordHandleActivity.this)
@@ -101,36 +139,22 @@ public class RecordHandleActivity extends Activity {
                     .setSurface(new Surface(surfaceTexture))
                     .build();
 
-
-            Log.i(TAG, TAG + ".startPreview screenWidth=" + width + " screenHeight=" + height);
+            cameraHelper.setRecordLisnter(recordLisnter);
+            cameraHelper.openCamera();
             Size size = cameraHelper.getSupportedPreviewSizes(surfaceTexture.getClass(), width, height);
             if (size != null) {
                 Log.i(TAG, TAG + ".startPreview width=" + size.getWidth() + " height=" + size.getHeight());
                 surfaceTexture.setDefaultBufferSize(size.getWidth(), size.getHeight());
             }
-
-
-            cameraHelper.openCamera();
         }
     }
 
-    @SuppressLint("NewApi")
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_CAMERA_CODE) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                startPreview();
-            } else {
-                finish();
-            }
+    private RecordLisnter recordLisnter = new RecordLisnter() {
+        @Override
+        public void onTakePicture(Bitmap bitmap) {
+            ivPicture.setVisibility(View.VISIBLE);
+            ivPicture.setImageBitmap(bitmap);
+
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-    }
+    };
 }
