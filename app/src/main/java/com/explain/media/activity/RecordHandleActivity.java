@@ -3,12 +3,15 @@ package com.explain.media.activity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.SurfaceTexture;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
@@ -19,10 +22,18 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.explain.media.MainActivity;
 import com.explain.media.R;
 import com.explain.media.listener.RecordLisnter;
 import com.explain.media.video.helper.CameraHelper;
+
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * 视频实时处理
@@ -36,7 +47,7 @@ public class RecordHandleActivity extends Activity implements View.OnClickListen
     private SurfaceTexture surfaceTexture;
     private CameraHelper cameraHelper;
     private ImageView ivRecord;
-    private ImageView ivPicture;
+    private ImageView ivSwitch;
     public static final int REQUEST_CAMERA_CODE = 100;
 
 
@@ -47,8 +58,8 @@ public class RecordHandleActivity extends Activity implements View.OnClickListen
         setContentView(R.layout.activity_record_handle);
         textureView = findViewById(R.id.textureview);
         ivRecord = findViewById(R.id.iv_record);
-        ivPicture = findViewById(R.id.iv_picture);
-        ivPicture.setOnClickListener(this);
+        ivSwitch = findViewById(R.id.iv_switch_camera);
+        ivSwitch.setOnClickListener(this);
 
         ivRecord.setOnClickListener(this);
         textureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
@@ -103,7 +114,7 @@ public class RecordHandleActivity extends Activity implements View.OnClickListen
                     cameraHelper.takePicture();
                 }
                 break;
-            case R.id.iv_picture:
+            case R.id.iv_switch_camera:
                 if (cameraHelper != null) {
                     cameraHelper.switchCamera();
                 }
@@ -152,9 +163,33 @@ public class RecordHandleActivity extends Activity implements View.OnClickListen
     private RecordLisnter recordLisnter = new RecordLisnter() {
         @Override
         public void onTakePicture(Bitmap bitmap) {
-            ivPicture.setVisibility(View.VISIBLE);
-            ivPicture.setImageBitmap(bitmap);
+            String picturePath = Environment.getExternalStorageDirectory() + File.separator + System.currentTimeMillis() + ".jpg";
+            Log.i(TAG, "picturePath=" + picturePath);
+            File file = new File(picturePath);
+            try {
+                //文件输出流
+                FileOutputStream fileOutputStream = new FileOutputStream(file);
+                BufferedOutputStream bos = new BufferedOutputStream(fileOutputStream);
+                //压缩图片，如果要保存png，就用Bitmap.CompressFormat.PNG，要保存jpg就用Bitmap.CompressFormat.JPEG,质量是100%，表示不压缩
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+                //写入，这里会卡顿，因为图片较大
+                fileOutputStream.flush();
+                //记得要关闭写入流
+                fileOutputStream.close();
+                //成功的提示，写入成功后，请在对应目录中找保存的图片
+                Log.i("Logger", "写入文件成功");
 
+                Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                Uri uri = Uri.fromFile(new File(picturePath));
+                intent.setData(uri);
+                sendBroadcast(intent);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                //失败的提示
+            } catch (IOException e) {
+                e.printStackTrace();
+                //失败的提示
+            }
         }
     };
 }
