@@ -12,9 +12,9 @@ import android.util.Log;
  */
 
 public class FFmpegCmd {
-//    static{
-//        System.loadLibrary("media-handle");
-//    }
+    static{
+        System.loadLibrary("media-handle");
+    }
 
     //开子线程调用native方法进行音视频处理
     public static void execute(final String filePath, final String newFilePath) {
@@ -24,12 +24,12 @@ public class FFmpegCmd {
             public void run() {
 
 //                //调用ffmpeg进行处理
-//                int result = pcm2aac(filePath, newFilePath);
-//                Log.i("FFmpegCmd", "result : " + result);
+                int result = pcm2aac(filePath, newFilePath);
+                Log.i("FFmpegCmd", "result : " + result);
 
             }
         }).start();
     }
 
-//    private native static int pcm2aac(String filePath, String newFilePath);
+    private native static int pcm2aac(String filePath, String newFilePath);
 }

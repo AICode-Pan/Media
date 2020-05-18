@@ -9,6 +9,12 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+                abiFilters 'armeabi-v7a', 'x86'
+            }
+        }
     }
     buildTypes {
         release {
@@ -21,6 +27,13 @@ android {
         main {
             jniLibs.srcDirs = ['libs']
             jni.srcDirs = []
+        }
+    }
+
+    // android中添加externalNativeBuild
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
         }
     }
 }

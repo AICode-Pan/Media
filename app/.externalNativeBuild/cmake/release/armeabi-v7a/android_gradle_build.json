@@ -1,119 +1,40 @@
-
 {
-	"buildFiles" : [ "/Users/panbeixing/Documents/Project/Media/app/CMakeLists.txt" ],
-	"cFileExtensions" : [ "c" ],
-	"cleanCommands" : 
-	[
-		"/Users/panbeixing/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/panbeixing/Documents/Project/Media/app/.externalNativeBuild/cmake/release/armeabi-v7a --target clean"
-	],
-	"cppFileExtensions" : [ "cpp" ],
-	"libraries" : 
-	{
-		"ffmpeg-Release-armeabi-v7a" : 
-		{
-			"abi" : "armeabi-v7a",
-			"artifactName" : "ffmpeg",
-			"buildType" : "release",
-			"output" : "../../../../libs/armeabi-v7a/libffmpeg.so",
-			"toolchain" : "588172366593762825"
-		},
-		"media-handle-Release-armeabi-v7a" : 
-		{
-			"abi" : "armeabi-v7a",
-			"artifactName" : "media-handle",
-			"buildCommand" : "/Users/panbeixing/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/panbeixing/Documents/Project/Media/app/.externalNativeBuild/cmake/release/armeabi-v7a --target media-handle",
-			"buildType" : "release",
-			"files" : 
-			[
-				
-				{
-					"flags" : "  --target=armv7-none-linux-androideabi --gcc-toolchain=/Users/panbeixing/Library/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64 --sysroot=/Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot -Dmedia_handle_EXPORTS -I../../../../src/main/cpp -I../../../../src/main/cpp/include  -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC      -c ",
-					"src" : "/Users/panbeixing/Documents/Project/Media/app/src/main/cpp/ffmpeg/cmdutils.c",
-					"workingDirectory" : "/Users/panbeixing/Documents/Project/Media/app/.externalNativeBuild/cmake/release/armeabi-v7a"
-				},
-				
-				{
-					"flags" : "  --target=armv7-none-linux-androideabi --gcc-toolchain=/Users/panbeixing/Library/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64 --sysroot=/Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot -Dmedia_handle_EXPORTS -I../../../../src/main/cpp -I../../../../src/main/cpp/include  -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC      -c ",
-					"src" : "/Users/panbeixing/Documents/Project/Media/app/src/main/cpp/ffmpeg/ffmpeg.c",
-					"workingDirectory" : "/Users/panbeixing/Documents/Project/Media/app/.externalNativeBuild/cmake/release/armeabi-v7a"
-				},
-				
-				{
-					"flags" : "  --target=armv7-none-linux-androideabi --gcc-toolchain=/Users/panbeixing/Library/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64 --sysroot=/Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot -Dmedia_handle_EXPORTS -I../../../../src/main/cpp -I../../../../src/main/cpp/include  -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC      -c ",
-					"src" : "/Users/panbeixing/Documents/Project/Media/app/src/main/cpp/ffmpeg/ffmpeg_filter.c",
-					"workingDirectory" : "/Users/panbeixing/Documents/Project/Media/app/.externalNativeBuild/cmake/release/armeabi-v7a"
-				},
-				
-				{
-					"flags" : "  --target=armv7-none-linux-androideabi --gcc-toolchain=/Users/panbeixing/Library/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64 --sysroot=/Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot -Dmedia_handle_EXPORTS -I../../../../src/main/cpp -I../../../../src/main/cpp/include  -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC      -c ",
-					"src" : "/Users/panbeixing/Documents/Project/Media/app/src/main/cpp/ffmpeg/ffmpeg_opt.c",
-					"workingDirectory" : "/Users/panbeixing/Documents/Project/Media/app/.externalNativeBuild/cmake/release/armeabi-v7a"
-				},
-				
-				{
-					"flags" : "  --target=armv7-none-linux-androideabi --gcc-toolchain=/Users/panbeixing/Library/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64 --sysroot=/Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot -Dmedia_handle_EXPORTS -I../../../../src/main/cpp -I../../../../src/main/cpp/include  -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC      -c ",
-					"src" : "/Users/panbeixing/Documents/Project/Media/app/src/main/cpp/ffmpeg_cmd.c",
-					"workingDirectory" : "/Users/panbeixing/Documents/Project/Media/app/.externalNativeBuild/cmake/release/armeabi-v7a"
-				},
-				
-				{
-					"flags" : "  --target=armv7-none-linux-androideabi --gcc-toolchain=/Users/panbeixing/Library/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64 --sysroot=/Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot -Dmedia_handle_EXPORTS -I../../../../src/main/cpp -I../../../../src/main/cpp/include  -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC      -c ",
-					"src" : "/Users/panbeixing/Documents/Project/Media/app/src/main/cpp/audio_player.c",
-					"workingDirectory" : "/Users/panbeixing/Documents/Project/Media/app/.externalNativeBuild/cmake/release/armeabi-v7a"
-				},
-				
-				{
-					"flags" : "  --target=armv7-none-linux-androideabi --gcc-toolchain=/Users/panbeixing/Library/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64 --sysroot=/Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot -Dmedia_handle_EXPORTS -I../../../../src/main/cpp -I../../../../src/main/cpp/include  -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC      -c ",
-					"src" : "/Users/panbeixing/Documents/Project/Media/app/src/main/cpp/openSL_audio_player.c",
-					"workingDirectory" : "/Users/panbeixing/Documents/Project/Media/app/.externalNativeBuild/cmake/release/armeabi-v7a"
-				},
-				
-				{
-					"flags" : "  --target=armv7-none-linux-androideabi --gcc-toolchain=/Users/panbeixing/Library/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64 --sysroot=/Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot -Dmedia_handle_EXPORTS -I../../../../src/main/cpp -I../../../../src/main/cpp/include  -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC      -c ",
-					"src" : "/Users/panbeixing/Documents/Project/Media/app/src/main/cpp/video_player.c",
-					"workingDirectory" : "/Users/panbeixing/Documents/Project/Media/app/.externalNativeBuild/cmake/release/armeabi-v7a"
-				},
-				
-				{
-					"flags" : "  --target=armv7-none-linux-androideabi --gcc-toolchain=/Users/panbeixing/Library/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64 --sysroot=/Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot  -Dmedia_handle_EXPORTS -I../../../../src/main/cpp -I../../../../src/main/cpp/include -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -std=gnu++11 -Os -DNDEBUG  -fPIC    -c ",
-					"src" : "/Users/panbeixing/Documents/Project/Media/app/src/main/cpp/ffmpeg_pusher.cpp",
-					"workingDirectory" : "/Users/panbeixing/Documents/Project/Media/app/.externalNativeBuild/cmake/release/armeabi-v7a"
-				},
-				
-				{
-					"flags" : "  --target=armv7-none-linux-androideabi --gcc-toolchain=/Users/panbeixing/Library/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64 --sysroot=/Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot -Dmedia_handle_EXPORTS -I../../../../src/main/cpp -I../../../../src/main/cpp/include  -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC      -c ",
-					"src" : "/Users/panbeixing/Documents/Project/Media/app/src/main/cpp/AVpacket_queue.c",
-					"workingDirectory" : "/Users/panbeixing/Documents/Project/Media/app/.externalNativeBuild/cmake/release/armeabi-v7a"
-				},
-				
-				{
-					"flags" : "  --target=armv7-none-linux-androideabi --gcc-toolchain=/Users/panbeixing/Library/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64 --sysroot=/Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot -Dmedia_handle_EXPORTS -I../../../../src/main/cpp -I../../../../src/main/cpp/include  -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC      -c ",
-					"src" : "/Users/panbeixing/Documents/Project/Media/app/src/main/cpp/media_player.c",
-					"workingDirectory" : "/Users/panbeixing/Documents/Project/Media/app/.externalNativeBuild/cmake/release/armeabi-v7a"
-				},
-				
-				{
-					"flags" : "  --target=armv7-none-linux-androideabi --gcc-toolchain=/Users/panbeixing/Library/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64 --sysroot=/Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot -Dmedia_handle_EXPORTS -I../../../../src/main/cpp -I../../../../src/main/cpp/include  -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC      -c ",
-					"src" : "/Users/panbeixing/Documents/Project/Media/app/src/main/cpp/video_filter.c",
-					"workingDirectory" : "/Users/panbeixing/Documents/Project/Media/app/.externalNativeBuild/cmake/release/armeabi-v7a"
-				},
-				
-				{
-					"flags" : "  --target=armv7-none-linux-androideabi --gcc-toolchain=/Users/panbeixing/Library/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64 --sysroot=/Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot  -Dmedia_handle_EXPORTS -I../../../../src/main/cpp -I../../../../src/main/cpp/include -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -isystem /Users/panbeixing/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -std=gnu++11 -Os -DNDEBUG  -fPIC    -c ",
-					"src" : "/Users/panbeixing/Documents/Project/Media/app/src/main/cpp/ffmpeg_audio_encoder_pure.cpp",
-					"workingDirectory" : "/Users/panbeixing/Documents/Project/Media/app/.externalNativeBuild/cmake/release/armeabi-v7a"
-				}
-			],
-			"output" : "/Users/panbeixing/Documents/Project/Media/app/build/intermediates/cmake/release/obj/armeabi-v7a/libmedia-handle.so",
-			"toolchain" : "588172366593762825"
-		}
-	},
-	"toolchains" : 
-	{
-		"588172366593762825" : 
-		{
-			"cCompilerExecutable" : "/Users/panbeixing/Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang",
-			"cppCompilerExecutable" : "/Users/panbeixing/Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
-		}
-	}
+  "stringTable": {
+    "0": "/Users/helloworld/Documents/ASProject/Media/app/.externalNativeBuild/cmake/release/armeabi-v7a",
+    "1": "-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -Oz -DNDEBUG  -fPIC  "
+  },
+  "buildFiles": [
+    "/Users/helloworld/Documents/ASProject/Media/app/../../../../Library/Android/sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
+    "/Users/helloworld/Documents/ASProject/Media/app/../../../../Library/Android/sdk/ndk/21.1.6352462/build/cmake/platforms.cmake",
+    "/Users/helloworld/Documents/ASProject/Media/app/CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "/Users/helloworld/Library/Android/sdk/cmake/3.10.2.4988404/bin/cmake --build /Users/helloworld/Documents/ASProject/Media/app/.externalNativeBuild/cmake/release/armeabi-v7a --target clean"
+  ],
+  "libraries": {
+    "media-handle-Release-armeabi-v7a": {
+      "buildCommand": "/Users/helloworld/Library/Android/sdk/cmake/3.10.2.4988404/bin/cmake --build /Users/helloworld/Documents/ASProject/Media/app/.externalNativeBuild/cmake/release/armeabi-v7a --target media-handle",
+      "buildType": "release",
+      "toolchain": "1085468401",
+      "abi": "armeabi-v7a",
+      "artifactName": "media-handle",
+      "files": [
+        {
+          "src": "/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/jni_hello.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "output": "/Users/helloworld/Documents/ASProject/Media/app/build/intermediates/cmake/release/obj/armeabi-v7a/libmedia-handle.so"
+    }
+  },
+  "toolchains": {
+    "1085468401": {
+      "cppCompilerExecutable": "/Users/helloworld/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
 }

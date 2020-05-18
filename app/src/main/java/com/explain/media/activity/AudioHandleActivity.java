@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.explain.media.R;
+import com.explain.media.utils.FFmpegCmd;
 
 /**
  * 音频处理
@@ -31,6 +32,7 @@ public class AudioHandleActivity extends Activity implements View.OnClickListene
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button1://PCM合并
+                FFmpegCmd.execute("sss", "gaa");
                 break;
             case R.id.button2://音频编码
                 break;
