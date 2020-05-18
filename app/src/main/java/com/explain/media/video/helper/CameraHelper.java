@@ -172,19 +172,52 @@ public class CameraHelper {
      * 获取可以支持的预览尺寸
      */
     public <T> Size getSupportedPreviewSizes(Class<T> tClass, int maxWidth, int maxHeight) {
-        float aspectRatio = ((float) maxWidth) / maxHeight;
+        // 当屏幕为垂直的时候需要把宽高值进行调换，保证宽大于高
+        int screenWidth;
+        int screenHeight;
+//        if (mIsPortrait) {
+        screenWidth = maxHeight;
+        screenHeight = maxWidth;
+//        } else {
+//            ReqTmpWidth = surfaceWidth;
+//            ReqTmpHeight = surfaceHeight;
+//        }
+
+        float aspectRatio = ((float) screenWidth) / screenHeight;
         Log.i(TAG, TAG + ".getSupportedPreviewSizes aspectRatio=" + aspectRatio);
+
         StreamConfigurationMap streamConfigurationMap = cameraCharacteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
         Size[] supportedSizes = streamConfigurationMap.getOutputSizes(tClass);
         Log.i(TAG, TAG + ".getSupportedPreviewSizes supportedSize=" + supportedSizes.length);
+
         for (int i = 0; i < supportedSizes.length; i++) {
             Size size = supportedSizes[i];
-            Log.i(TAG, TAG + ".getSupportedPreviewSizes width=" + size.getWidth() + " height=" + size.getHeight());
-            if (((float) size.getHeight()) / size.getWidth() == aspectRatio) {
+            //将预览尺寸列表每个元素宽高与surfaceview的宽高进行比较，如果存在宽高尺寸都与surfaceview宽高尺寸相同的size则将该宽高设置为预览尺寸。
+            if (screenWidth == size.getWidth() && screenHeight == size.getHeight()) {
+                Log.i(TAG, TAG + ".getSupportedPreviewSizes size is the same");
                 return size;
             }
         }
-        return null;
+
+        float curRatio, deltaRatio;
+        float deltaRatioMin = Float.MAX_VALUE;
+
+        Size optimalSize = null;
+        for (int i = 0; i < supportedSizes.length; i++) {
+            Size size = supportedSizes[i];
+
+            Log.i(TAG, TAG + ".getSupportedPreviewSizes width=" + size.getWidth() + " height=" + size.getHeight());
+
+            curRatio = ((float) size.getWidth()) / size.getHeight();
+            deltaRatio = Math.abs(aspectRatio - curRatio);
+            Log.i(TAG, TAG + ".getSupportedPreviewSizes deltaRatio=" + deltaRatio + " deltaRatioMin=" + deltaRatioMin);
+            if (deltaRatio < deltaRatioMin) {
+                deltaRatioMin = deltaRatio;
+                optimalSize = size;
+            }
+        }
+
+        return optimalSize;
     }
 
     /**
