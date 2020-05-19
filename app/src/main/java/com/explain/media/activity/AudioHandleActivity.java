@@ -52,8 +52,16 @@ public class AudioHandleActivity extends Activity implements View.OnClickListene
             case R.id.button6://音频混合
                 break;
             case R.id.button7://AudioTrack播放
+                Intent intent7 = new Intent();
+                intent7.setClass(this, AudioPlayActivity.class);
+                intent7.putExtra("type", 0);
+                startActivity(intent7);
                 break;
             case R.id.button8://OpenSL播放
+                Intent intent8 = new Intent();
+                intent8.setClass(this, AudioPlayActivity.class);
+                intent8.putExtra("type", 1);
+                startActivity(intent8);
                 break;
         }
     }
