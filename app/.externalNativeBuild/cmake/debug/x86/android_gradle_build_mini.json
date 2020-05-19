@@ -1,0 +1,18 @@
+{
+  "buildFiles": [
+    "D:\\AndroidProject\\Media\\app\\CMakeLists.txt",
+    "C:\\Users\\PC\\AppData\\Local\\Android\\Sdk\\ndk\\21.1.6352462\\build\\cmake\\platforms.cmake",
+    "C:\\Users\\PC\\AppData\\Local\\Android\\Sdk\\ndk\\21.1.6352462\\build\\cmake\\android.toolchain.cmake"
+  ],
+  "cleanCommands": [
+    "C:\\Users\\PC\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\cmake.exe --build D:\\AndroidProject\\Media\\app\\.externalNativeBuild\\cmake\\debug\\x86 --target clean"
+  ],
+  "libraries": {
+    "media-handle-Debug-x86": {
+      "artifactName": "media-handle",
+      "buildCommand": "C:\\Users\\PC\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\cmake.exe --build D:\\AndroidProject\\Media\\app\\.externalNativeBuild\\cmake\\debug\\x86 --target media-handle",
+      "abi": "x86",
+      "output": "D:\\AndroidProject\\Media\\app\\build\\intermediates\\cmake\\debug\\obj\\x86\\libmedia-handle.so"
+    }
+  }
+}
