@@ -28,6 +28,8 @@
         <activity android:name=".activity.VideoHandleActivity"/>
         <activity android:name=".activity.RecordHandleActivity" />
 
+        <!-- 二级页面 -->
+        <activity android:name=".activity.second.TranscodingActivity"/>
         <activity android:name=".activity.ARecordActivity"/>
         <activity android:name=".activity.MRecordActivity"/>
         <activity android:name=".activity.AudioPlayActivity"/>

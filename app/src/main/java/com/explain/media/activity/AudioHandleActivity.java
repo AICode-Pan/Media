@@ -1,12 +1,16 @@
 package com.explain.media.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 
 import com.explain.media.R;
+import com.explain.media.activity.second.TranscodingActivity;
 import com.explain.media.utils.FFmpegCmd;
+import com.explain.media.utils.SDFileUtil;
 
 /**
  * 音频处理
@@ -37,6 +41,9 @@ public class AudioHandleActivity extends Activity implements View.OnClickListene
             case R.id.button2://音频编码
                 break;
             case R.id.button3://音频转码
+                Intent intent3 = new Intent();
+                intent3.setClass(this, TranscodingActivity.class);
+                startActivity(intent3);
                 break;
             case R.id.button4://音频剪切
                 break;

@@ -1,8 +1,8 @@
-# Install script for directory: /Users/helloworld/Documents/ASProject/Media/app
+# Install script for directory: D:/AndroidProject/Media/app
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/usr/local")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/Project")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/helloworld/Documents/ASProject/Media/app/.externalNativeBuild/cmake/debug/armeabi-v7a/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/AndroidProject/Media/app/.externalNativeBuild/cmake/debug/armeabi-v7a/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

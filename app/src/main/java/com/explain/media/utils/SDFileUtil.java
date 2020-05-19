@@ -1,15 +1,24 @@
 package com.explain.media.utils;
 
+import android.annotation.TargetApi;
+import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
 import android.util.Log;
 
 import com.explain.media.CoreApplication;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <pre>
@@ -61,30 +70,6 @@ public class SDFileUtil {
     }
 
     /**
-     * 获取文件的绝对路径
-     * @param context
-     * @param uri
-     * @return
-     */
-    public static String getPath(Context context, Uri uri) {
-        if ("content".equalsIgnoreCase(uri.getScheme())) {
-            String[] projection = {"_data"};
-            Cursor cursor = null;
-            try {
-                cursor = context.getContentResolver().query(uri, projection, null, null, null);
-                int column_index = cursor.getColumnIndexOrThrow("_data");
-                if (cursor.moveToFirst()) {
-                    return cursor.getString(column_index);
-                }
-            } catch (Exception e) {
-            }
-        } else if ("file".equalsIgnoreCase(uri.getScheme())) {
-            return uri.getPath();
-        }
-        return null;
-    }
-
-    /**
      * 转换文件大小
      *
      * @param fileS
@@ -107,5 +92,220 @@ public class SDFileUtil {
             fileSizeString = df.format((double) fileS / 1073741824) + "GB";
         }
         return fileSizeString;
+    }
+
+    /**
+     * Get a file path from a Uri. This will get the the path for Storage
+     * Access Framework Documents.
+     * @param context The context
+     * @param uri The Uri to query
+     */
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    public static String getPath(final Context context, final Uri uri) {
+
+        // DocumentProvider
+        if (DocumentsContract.isDocumentUri(context, uri)) {
+            // ExternalStorageProvider
+            if (isExternalStorageDocument(uri)) {
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                final String type = split[0];
+
+                if ("primary".equalsIgnoreCase(type)) {
+                    return Environment.getExternalStorageDirectory() + "/" + split[1];
+                }
+            }
+            // DownloadsProvider
+            else if (isDownloadsDocument(uri)) {
+
+                final String id = DocumentsContract.getDocumentId(uri);
+                final Uri contentUri = ContentUris.withAppendedId(
+                        Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+
+                return getDataColumn(context, contentUri, null, null);
+            }
+            // MediaProvider
+            else if (isMediaDocument(uri)) {
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                final String type = split[0];
+
+                Uri contentUri = null;
+                if ("image".equals(type)) {
+                    contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                } else if ("video".equals(type)) {
+                    contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                } else if ("audio".equals(type)) {
+                    contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                }
+
+                final String selection = "_id=?";
+                final String[] selectionArgs = new String[] {
+                        split[1]
+                };
+
+                return getDataColumn(context, contentUri, selection, selectionArgs);
+            }
+        }
+        // MediaStore (and general)
+        else if ("content".equalsIgnoreCase(uri.getScheme())) {
+            return getDataColumn(context, uri, null, null);
+        }
+        // File
+        else if ("file".equalsIgnoreCase(uri.getScheme())) {
+            return uri.getPath();
+        }
+        return null;
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is ExternalStorageProvider.
+     */
+    private static boolean isExternalStorageDocument(Uri uri) {
+        return "com.android.externalstorage.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is DownloadsProvider.
+     */
+    private static boolean isDownloadsDocument(Uri uri) {
+        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is MediaProvider.
+     */
+    private static boolean isMediaDocument(Uri uri) {
+        return "com.android.providers.media.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     **
+     * Get the value of the data column for this Uri. This is useful for
+     * MediaStore Uris, and other file-based ContentProviders.
+     *
+     * @param context The context
+     * @param uri The Uri to query
+     * @param selection (Optional) Filter used in the query.
+     * @param selectionArgs (Optional) Selection arguments used in the query.
+     * @return The value of the _data column, which is typically a file path.
+     */
+    private static String getDataColumn(Context context, Uri uri, String selection,
+                                        String[] selectionArgs) {
+        Cursor cursor = null;
+        final String column = "_data";
+        final String[] projection = {
+                column
+        };
+
+        try {
+            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs,
+                    null);
+            if (cursor != null && cursor.moveToFirst()) {
+                final int index = cursor.getColumnIndexOrThrow(column);
+                return cursor.getString(index);
+            }
+        } finally {
+            if (cursor != null)
+                cursor.close();
+        }
+        return null;
+    }
+
+    /**
+     * 获取文件类型
+     * （获取图片jpg、png等格式、文件word、xml等格式等）
+     *
+     * @param filePath
+     * @return
+     */
+    public static String getFileType(String filePath) {
+        Map<String, String> mFileTypes = getFileTypes();
+        return mFileTypes.get(getFileHeader(filePath));
+    }
+
+    private static Map<String, String> mFileTypes;
+    private static Map<String, String> getFileTypes() {
+        if (mFileTypes == null) {
+            mFileTypes = new HashMap<String, String>();
+            mFileTypes.put("FFD8FF", "jpg");
+            mFileTypes.put("89504E47", "png");
+            mFileTypes.put("47494638", "gif");
+            mFileTypes.put("49492A00", "tif");
+            mFileTypes.put("424D", "bmp");
+            mFileTypes.put("41433130", "dwg"); //CAD
+            mFileTypes.put("38425053", "psd");
+            mFileTypes.put("7B5C727466", "rtf"); //日记本
+            mFileTypes.put("3C3F786D6C", "xml");
+            mFileTypes.put("68746D6C3E", "html");
+            mFileTypes.put("44656C69766572792D646174653A", "eml"); //邮件
+            mFileTypes.put("D0CF11E0", "doc");
+            mFileTypes.put("5374616E64617264204A", "mdb");
+            mFileTypes.put("252150532D41646F6265", "ps");
+            mFileTypes.put("255044462D312E", "pdf");
+            mFileTypes.put("504B0304", "zip");
+            mFileTypes.put("52617221", "rar");
+            mFileTypes.put("57415645", "wav");
+            mFileTypes.put("41564920", "avi");
+            mFileTypes.put("2E524D46", "rm");
+            mFileTypes.put("000001BA", "mpg");
+            mFileTypes.put("000001B3", "mpg");
+            mFileTypes.put("6D6F6F76", "mov");
+            mFileTypes.put("3026B2758E66CF11", "asf");
+            mFileTypes.put("4D546864", "mid");
+            mFileTypes.put("1F8B08", "gz");
+        }
+        return mFileTypes;
+    }
+
+    /**
+     * 获取文件头信息
+     *
+     * @param filePath
+     * @return
+     */
+    private static String getFileHeader(String filePath) {
+        FileInputStream is = null;
+        String value = null;
+        try {
+            is = new FileInputStream(filePath);
+            byte[] b = new byte[3];
+            is.read(b, 0, b.length);
+            value = bytesToHexString(b);
+        } catch (Exception e) {
+        } finally {
+            if (null != is) {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                }
+            }
+        }
+        return value;
+    }
+
+    /**
+     * 将byte字节转换为十六进制字符串
+     *
+     * @param src
+     * @return
+     */
+    private static String bytesToHexString(byte[] src) {
+        StringBuilder builder = new StringBuilder();
+        if (src == null || src.length <= 0) {
+            return null;
+        }
+        String hv;
+        for (int i = 0; i < src.length; i++) {
+            hv = Integer.toHexString(src[i] & 0xFF).toUpperCase();
+            if (hv.length() < 2) {
+                builder.append(0);
+            }
+            builder.append(hv);
+        }
+        return builder.toString();
     }
 }
