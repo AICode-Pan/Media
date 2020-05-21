@@ -9,3 +9,4 @@ local.properties
 gradlew.bat
 buildApks/
 local.properties
+app/.externalNativeBuild/

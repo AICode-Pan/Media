@@ -1,3 +1,0 @@
-D:/AndroidProject/Media/app/.externalNativeBuild/cmake/release/x86/CMakeFiles/media-handle.dir
-D:/AndroidProject/Media/app/.externalNativeBuild/cmake/release/x86/CMakeFiles/edit_cache.dir
-D:/AndroidProject/Media/app/.externalNativeBuild/cmake/release/x86/CMakeFiles/rebuild_cache.dir

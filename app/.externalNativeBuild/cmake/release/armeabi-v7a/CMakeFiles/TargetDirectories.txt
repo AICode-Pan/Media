@@ -1,3 +1,0 @@
-D:/AndroidProject/Media/app/.externalNativeBuild/cmake/release/armeabi-v7a/CMakeFiles/media-handle.dir
-D:/AndroidProject/Media/app/.externalNativeBuild/cmake/release/armeabi-v7a/CMakeFiles/edit_cache.dir
-D:/AndroidProject/Media/app/.externalNativeBuild/cmake/release/armeabi-v7a/CMakeFiles/rebuild_cache.dir
