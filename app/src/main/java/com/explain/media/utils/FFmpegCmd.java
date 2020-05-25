@@ -14,6 +14,7 @@ import android.util.Log;
 public class FFmpegCmd {
     static{
         System.loadLibrary("media-handle");
+        System.loadLibrary("ffmpeg");
     }
 
     //开子线程调用native方法进行音视频处理
