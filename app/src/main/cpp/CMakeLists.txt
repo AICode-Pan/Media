@@ -7,7 +7,7 @@ add_library( # Sets the name of the library.
         SHARED
 
         # Provides a relative path to your source file(s).
-        src/main/cpp/audio_handler.cpp
+        audio_handler.cpp
         )
 
 add_library(ffmpeg
@@ -25,13 +25,13 @@ set_target_properties(mp3lame
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
-include_directories(src/main/cpp)
-include_directories(src/main/cpp/include)
+include_directories(.)
+include_directories(include)
 if(${CMAKE_ANDROID_ARCH_ABI} MATCHES "armeabi-v7a")
-    include_directories(src/main/cpp/include/armeabi-v7a)
+    include_directories(include/armeabi-v7a)
     message("This is armeabi-v7a")
 elseif(${CMAKE_ANDROID_ARCH_ABI} MATCHES "arm64-v8a")
-    include_directories(src/main/cpp/include/arm64-v8a)
+    include_directories(include/arm64-v8a)
     message("This is arm64-v8a")
 endif()
 

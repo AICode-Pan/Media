@@ -29,10 +29,11 @@
         <activity android:name=".activity.RecordHandleActivity" />
 
         <!-- 二级页面 -->
+        <activity android:name=".activity.second.AudioDecodeActivity" />
         <activity android:name=".activity.second.TranscodingActivity"/>
-        <activity android:name=".activity.ARecordActivity"/>
-        <activity android:name=".activity.MRecordActivity"/>
-        <activity android:name=".activity.AudioPlayActivity"/>
-        <activity android:name=".activity.AudioEncodeActivity"/>
+        <activity android:name=".activity.second.ARecordActivity"/>
+        <activity android:name=".activity.second.MRecordActivity"/>
+        <activity android:name=".activity.second.AudioPlayActivity"/>
+        <activity android:name=".activity.second.AudioEncodeActivity"/>
     </application>
 </manifest>
