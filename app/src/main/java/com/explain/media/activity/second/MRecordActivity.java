@@ -1,4 +1,4 @@
-package com.explain.media.activity;
+package com.explain.media.activity.second;
 
 import android.app.Activity;
 import android.os.Bundle;

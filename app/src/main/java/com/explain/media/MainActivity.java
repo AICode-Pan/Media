@@ -6,11 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.explain.media.activity.ARecordActivity;
-import com.explain.media.activity.AudioEncodeActivity;
 import com.explain.media.activity.AudioHandleActivity;
-import com.explain.media.activity.MRecordActivity;
-import com.explain.media.activity.AudioPlayActivity;
+import com.explain.media.activity.second.MRecordActivity;
 import com.explain.media.activity.RecordHandleActivity;
 import com.explain.media.activity.VideoHandleActivity;
 

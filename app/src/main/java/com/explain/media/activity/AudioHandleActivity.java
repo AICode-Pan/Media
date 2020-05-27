@@ -4,13 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 
 import com.explain.media.R;
+import com.explain.media.activity.second.AudioDecodeActivity;
+import com.explain.media.activity.second.AudioPlayActivity;
 import com.explain.media.activity.second.TranscodingActivity;
 import com.explain.media.utils.FFmpegCmd;
-import com.explain.media.utils.SDFileUtil;
 
 /**
  * 音频处理
@@ -22,6 +22,7 @@ public class AudioHandleActivity extends Activity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audio_handle);
 
+        findViewById(R.id.button0).setOnClickListener(this);
         findViewById(R.id.button1).setOnClickListener(this);
         findViewById(R.id.button2).setOnClickListener(this);
         findViewById(R.id.button3).setOnClickListener(this);
@@ -35,11 +36,15 @@ public class AudioHandleActivity extends Activity implements View.OnClickListene
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.button0://音频解码
+                Intent intent0 = new Intent();
+                intent0.setClass(this, AudioDecodeActivity.class);
+                startActivity(intent0);
+                break;
             case R.id.button1://PCM合并
                 FFmpegCmd.execute("sss", "gaa");
                 break;
             case R.id.button2://音频编码
-                FFmpegCmd.decode("/storage/emulated/0/qqmusic/song/周深 - 大鱼 [mqms2].mp3", "/storage/emulated/0/qqmusic/song/dayu.pcm");
                 break;
             case R.id.button3://音频转码
                 Intent intent3 = new Intent();

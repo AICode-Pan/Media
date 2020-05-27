@@ -1,23 +1,18 @@
-package com.explain.media.activity;
+package com.explain.media.activity.second;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.explain.media.R;
+import com.explain.media.activity.base.BaseActivity;
 import com.explain.media.utils.MediaFile;
-import com.explain.media.utils.SDFileUtil;
 
-import java.io.File;
 import java.io.IOException;
 
 /**

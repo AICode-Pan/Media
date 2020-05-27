@@ -1,4 +1,4 @@
-package com.explain.media.activity;
+package com.explain.media.activity.base;
 
 import android.Manifest;
 import android.app.Activity;
