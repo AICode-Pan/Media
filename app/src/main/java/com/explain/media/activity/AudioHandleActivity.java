@@ -39,6 +39,7 @@ public class AudioHandleActivity extends Activity implements View.OnClickListene
                 FFmpegCmd.execute("sss", "gaa");
                 break;
             case R.id.button2://音频编码
+                FFmpegCmd.decode("/storage/emulated/0/qqmusic/song/周深 - 大鱼 [mqms2].mp3", "/storage/emulated/0/qqmusic/song/dayu.pcm");
                 break;
             case R.id.button3://音频转码
                 Intent intent3 = new Intent();
