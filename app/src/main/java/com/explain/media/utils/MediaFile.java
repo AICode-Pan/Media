@@ -50,6 +50,8 @@ public class MediaFile {
     private static final int FIRST_PLAYLIST_FILE_TYPE = FILE_TYPE_M3U;
     private static final int LAST_PLAYLIST_FILE_TYPE = FILE_TYPE_WPL;
 
+    public static final int FILE_TYPE_PCM     = 51;
+
     //静态内部类
     static class MediaFileType {
 
@@ -104,6 +106,7 @@ public class MediaFile {
         addFileType("PLS", FILE_TYPE_PLS, "audio/x-scpls");
         addFileType("WPL", FILE_TYPE_WPL, "application/vnd.ms-wpl");
 
+        addFileType("PCM", FILE_TYPE_PCM, "audio/pcm");
         // compute file extensions list for native Media Scanner
         StringBuilder builder = new StringBuilder();
         Iterator<String> iterator = sFileTypeMap.keySet().iterator();
@@ -124,6 +127,10 @@ public class MediaFile {
                 fileType <= LAST_AUDIO_FILE_TYPE) ||
                 (fileType >= FIRST_MIDI_FILE_TYPE &&
                         fileType <= LAST_MIDI_FILE_TYPE));
+    }
+
+    public static boolean isAudioPCMFileType(int fileType) {
+        return fileType == FILE_TYPE_PCM;
     }
 
     public static boolean isVideoFileType(int fileType) {
@@ -160,6 +167,14 @@ public class MediaFile {
         MediaFileType type = getFileType(path);
         if(null != type) {
             return isAudioFileType(type.fileType);
+        }
+        return false;
+    }
+    //是否是PCM裸流类型
+    public static boolean isPCMFileType(String path) {
+        MediaFileType type = getFileType(path);
+        if (null != type) {
+            return isAudioPCMFileType(type.fileType);
         }
         return false;
     }

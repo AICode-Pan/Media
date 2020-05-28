@@ -34,6 +34,7 @@
         <activity android:name=".activity.second.ARecordActivity"/>
         <activity android:name=".activity.second.MRecordActivity"/>
         <activity android:name=".activity.second.AudioPlayActivity"/>
+        <activity android:name=".activity.second.PCMPlayActivity" />
         <activity android:name=".activity.second.AudioEncodeActivity"/>
     </application>
 </manifest>

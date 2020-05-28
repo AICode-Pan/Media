@@ -3,8 +3,6 @@ package com.explain.media.activity.second;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,19 +11,8 @@ import com.explain.media.R;
 import com.explain.media.activity.base.BaseActivity;
 import com.explain.media.utils.MediaFile;
 
-import java.io.IOException;
-
-/**
- * <pre>
- *     author : panbeixing
- *     time : 2018/9/21
- *     desc : 音频播放
- *     version : 1.0
- * </pre>
- */
-
-public class AudioPlayActivity extends BaseActivity implements View.OnClickListener {
-    private static final String TAG = AudioPlayActivity.class.getSimpleName();
+public class PCMPlayActivity extends BaseActivity implements View.OnClickListener {
+    private static final String TAG = PCMPlayActivity.class.getSimpleName();
 
     private TextView tvSelectFile, tvFilePath, tvPlay;
     private TextView tvFileInfo;
@@ -35,8 +22,7 @@ public class AudioPlayActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setTitle("音频播放");
+        setTitle("PCM文件播放");
 
         setContentView(R.layout.activity_audio_player);
         tvSelectFile = findViewById(R.id.tv_select_file);
@@ -55,7 +41,7 @@ public class AudioPlayActivity extends BaseActivity implements View.OnClickListe
                 selectFile();
                 break;
             case R.id.btn_audio_play:
-                audioPlay();
+                play();
                 break;
         }
     }
@@ -63,9 +49,8 @@ public class AudioPlayActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void onSelectedFile(String filePath) {
         super.onSelectedFile(filePath);
-
-        if (!MediaFile.isAudioFileType(filePath)) {
-            Toast.makeText(this, "文件格式错误，非音频文件", Toast.LENGTH_SHORT).show();
+        if (!MediaFile.isPCMFileType(filePath)) {
+            Toast.makeText(this, "文件格式错误，不是PCM文件", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -73,34 +58,31 @@ public class AudioPlayActivity extends BaseActivity implements View.OnClickListe
         tvFilePath.setText("文件地址:" + filePath);
     }
 
+
     /**
      * 更新页面上的文件信息
      *
      * @param uri
      */
     private void updateFileInfo(String uri) {
-    }
-
-    private void audioPlay() {
-        if (!TextUtils.isEmpty(filePath)) {
-            try {
-                Log.i(TAG, TAG + ".path : " + filePath);
-                mediaPlayer = new MediaPlayer();
-                mediaPlayer.setDataSource(filePath);
-                mediaPlayer.prepare();
-                mediaPlayer.start();
-                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        Log.i(TAG, TAG + ".onCompletion");
-                        mediaPlayer.release();
-                        mediaPlayer = null;
-                    }
-                });
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        switch (0) {
+            case 0:
+                setTitle("AudioTrack播放");
+                break;
+            case 1:
+                setTitle("MediaPlayer播放");
+                break;
+            case 2:
+                setTitle("OpenSL播放");
+                break;
         }
     }
 
+    private void play() {
+
+    }
+
+    private void pause() {
+
+    }
 }

@@ -9,6 +9,7 @@ import android.view.View;
 import com.explain.media.R;
 import com.explain.media.activity.second.AudioDecodeActivity;
 import com.explain.media.activity.second.AudioPlayActivity;
+import com.explain.media.activity.second.PCMPlayActivity;
 import com.explain.media.activity.second.TranscodingActivity;
 import com.explain.media.utils.FFmpegCmd;
 
@@ -57,16 +58,14 @@ public class AudioHandleActivity extends Activity implements View.OnClickListene
                 break;
             case R.id.button6://音频混合
                 break;
-            case R.id.button7://AudioTrack播放
+            case R.id.button7://音频播放
                 Intent intent7 = new Intent();
                 intent7.setClass(this, AudioPlayActivity.class);
-                intent7.putExtra("type", 0);
                 startActivity(intent7);
                 break;
-            case R.id.button8://OpenSL播放
+            case R.id.button8://PCM文件播放
                 Intent intent8 = new Intent();
-                intent8.setClass(this, AudioPlayActivity.class);
-                intent8.putExtra("type", 1);
+                intent8.setClass(this, PCMPlayActivity.class);
                 startActivity(intent8);
                 break;
         }

@@ -22,7 +22,7 @@ public class AudioDecodeActivity extends BaseActivity implements View.OnClickLis
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("音频解码");
-        setContentView(R.layout.activity_transcoding);
+        setContentView(R.layout.activity_audio_decode);
         findViewById(R.id.tv_select_file).setOnClickListener(this);
         findViewById(R.id.tv_start_decode).setOnClickListener(this);
         tvFilePath = findViewById(R.id.tv_filepath);
