@@ -32,8 +32,6 @@ Java_com_explain_media_utils_FFmpegCmd_pcm2aac(JNIEnv *env, jclass clazz, jstrin
 }
 
 
-
-
 #define MAX_AUDIO_FRAME_SIZE 192000 // 1 second of 48khz 32bit audio
 
 static int audio_decode_example(const char *input, const char *output) {
@@ -151,7 +149,7 @@ static int audio_decode_example(const char *input, const char *output) {
                 //4.3 转换音频数据
                 swr_convert(au_convert_ctx, &out_buffer, MAX_AUDIO_FRAME_SIZE,
                             (const uint8_t **) pFrame->data, pFrame->nb_samples);
-                LOGE("index:%5d\t pts:%lld\t packet size:%d\n",index,packet->pts,packet->size);
+                LOGE("index:%5d\t pts:%lld\t packet size:%d\n", index, packet->pts, packet->size);
 
                 //4.4 存储数据
                 fwrite(out_buffer, 1, static_cast<size_t>(out_buffer_size), outputFile);
@@ -175,14 +173,14 @@ static int audio_decode_example(const char *input, const char *output) {
 
 extern "C"
 JNIEXPORT void
-        JNICALL
-Java_com_explain_media_utils_FFmpegCmd_audioDecode(JNIEnv * env , jclass clazz, jstring file_path ,
-jstring new_file_path ) {
-const char *input = env->GetStringUTFChars(file_path, 0);
-const char *output = env->GetStringUTFChars(new_file_path, 0);
-int flog = audio_decode_example(input, output);
+JNICALL
+Java_com_explain_media_utils_FFmpegCmd_audioDecode(JNIEnv *env, jclass clazz, jstring file_path,
+                                                   jstring new_file_path) {
+    const char *input = env->GetStringUTFChars(file_path, 0);
+    const char *output = env->GetStringUTFChars(new_file_path, 0);
+    int flog = audio_decode_example(input, output);
 
-env->ReleaseStringUTFChars(file_path, input);
-env->ReleaseStringUTFChars(new_file_path, output);
+    env->ReleaseStringUTFChars(file_path, input);
+    env->ReleaseStringUTFChars(new_file_path, output);
 }
 
