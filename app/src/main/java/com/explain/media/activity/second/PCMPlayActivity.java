@@ -3,12 +3,14 @@ package com.explain.media.activity.second;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.explain.media.R;
 import com.explain.media.activity.base.BaseActivity;
+import com.explain.media.manager.AudioTrackManager;
 import com.explain.media.utils.MediaFile;
 
 public class PCMPlayActivity extends BaseActivity implements View.OnClickListener {
@@ -16,8 +18,8 @@ public class PCMPlayActivity extends BaseActivity implements View.OnClickListene
 
     private TextView tvSelectFile, tvFilePath, tvPlay;
     private TextView tvFileInfo;
-    private MediaPlayer mediaPlayer;
     private String filePath;
+    private AudioTrackManager audioTrackManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,6 +34,12 @@ public class PCMPlayActivity extends BaseActivity implements View.OnClickListene
 
         tvSelectFile.setOnClickListener(this);
         findViewById(R.id.btn_audio_play).setOnClickListener(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        pause();
     }
 
     @Override
@@ -79,10 +87,15 @@ public class PCMPlayActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void play() {
-
+        if (!TextUtils.isEmpty(filePath)) {
+            audioTrackManager = new AudioTrackManager();
+            audioTrackManager.play(filePath);
+        }
     }
 
     private void pause() {
-
+        if (audioTrackManager != null) {
+            audioTrackManager.release();
+        }
     }
 }

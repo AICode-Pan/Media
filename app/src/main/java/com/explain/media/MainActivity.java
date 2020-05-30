@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.explain.media.activity.AudioHandleActivity;
+import com.explain.media.activity.second.ARecordActivity;
 import com.explain.media.activity.second.MRecordActivity;
 import com.explain.media.activity.RecordHandleActivity;
 import com.explain.media.activity.VideoHandleActivity;
@@ -42,7 +43,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.button2:
-                intent.setClass(MainActivity.this, MRecordActivity.class);
+                intent.setClass(MainActivity.this, ARecordActivity.class);
                 startActivity(intent);
                 break;
             case R.id.button3:
