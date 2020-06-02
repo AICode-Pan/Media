@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 
 import com.explain.media.activity.AudioHandleActivity;
@@ -11,6 +12,7 @@ import com.explain.media.activity.second.ARecordActivity;
 import com.explain.media.activity.second.MRecordActivity;
 import com.explain.media.activity.RecordHandleActivity;
 import com.explain.media.activity.VideoHandleActivity;
+import com.explain.media.utils.FFmpegCmd;
 
 /**
  * <pre>

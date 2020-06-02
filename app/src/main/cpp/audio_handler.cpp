@@ -13,8 +13,17 @@ extern "C" {
 #include <include/libavutil/timestamp.h>
 #include <include/libavformat/avformat.h>
 #include <include/libswscale/swscale.h>
-
 };
+
+extern "C"
+JNIEXPORT jint JNICALL
+Java_com_explain_media_utils_FFmpegCmd_getAVCodecVersion(JNIEnv *env, jclass clazz) {
+    char str[25];
+    int i;
+    i = sprintf(str, "sshh%d", avcodec_version());
+    LOGD("Output:avcodec_version = %d\n", i);
+    return i;
+}
 
 //
 // Created by PC on 2020/5/23.
@@ -183,4 +192,3 @@ Java_com_explain_media_utils_FFmpegCmd_audioDecode(JNIEnv *env, jclass clazz, js
     env->ReleaseStringUTFChars(file_path, input);
     env->ReleaseStringUTFChars(new_file_path, output);
 }
-

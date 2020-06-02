@@ -46,6 +46,12 @@ public class FFmpegCmd {
         }).start();
     }
 
+    //获取avcodec版本号
+    public static int getVersion() {
+        return getAVCodecVersion();
+    }
+
+    private native static int getAVCodecVersion();
     private native static int pcm2aac(String filePath, String newFilePath);
     private native static void audioDecode(String filePath, String newFilePath);
 }
