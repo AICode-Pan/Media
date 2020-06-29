@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.explain.media.R;
 import com.explain.media.activity.second.AudioDecodeActivity;
+import com.explain.media.activity.second.AudioEncodeActivity;
 import com.explain.media.activity.second.AudioPlayActivity;
 import com.explain.media.activity.second.PCMPlayActivity;
 import com.explain.media.activity.second.TranscodingActivity;
@@ -24,12 +25,12 @@ public class AudioHandleActivity extends Activity implements View.OnClickListene
         setContentView(R.layout.activity_audio_handle);
 
         findViewById(R.id.button0).setOnClickListener(this);
-        findViewById(R.id.button1).setOnClickListener(this);
+        findViewById(R.id.button1).setEnabled(false);
         findViewById(R.id.button2).setOnClickListener(this);
         findViewById(R.id.button3).setOnClickListener(this);
-        findViewById(R.id.button4).setOnClickListener(this);
-        findViewById(R.id.button5).setOnClickListener(this);
-        findViewById(R.id.button6).setOnClickListener(this);
+        findViewById(R.id.button4).setEnabled(false);
+        findViewById(R.id.button5).setEnabled(false);
+        findViewById(R.id.button6).setEnabled(false);
         findViewById(R.id.button7).setOnClickListener(this);
         findViewById(R.id.button8).setOnClickListener(this);
     }
@@ -43,9 +44,11 @@ public class AudioHandleActivity extends Activity implements View.OnClickListene
                 startActivity(intent0);
                 break;
             case R.id.button1://PCM合并
-                FFmpegCmd.execute("sss", "gaa");
                 break;
             case R.id.button2://音频编码
+                Intent intent2 = new Intent();
+                intent2.setClass(this, AudioEncodeActivity.class);
+                startActivity(intent2);
                 break;
             case R.id.button3://音频转码
                 Intent intent3 = new Intent();

@@ -31,7 +31,7 @@ Java_com_explain_media_utils_FFmpegCmd_getAVCodecVersion(JNIEnv *env, jclass cla
 extern "C"
 JNIEXPORT jint
 JNICALL
-Java_com_explain_media_utils_FFmpegCmd_pcm2aac(JNIEnv *env, jclass clazz, jstring file_path,
+Java_com_explain_media_utils_FFmpegCmd_audioEncode(JNIEnv *env, jclass clazz, jstring file_path,
                                                jstring new_file_path) {
     char str[25];
     int i;

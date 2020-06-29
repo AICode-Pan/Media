@@ -24,22 +24,22 @@ public class FFmpegCmd {
 
 
 
-    //开子线程调用native方法进行音视频处理
-    public static void execute(final String filePath, final String newFilePath) {
+    //开子线程调用native方法进行音视频编码
+    public static void encode(final String filePath, final String newFilePath) {
         Log.d("FFmpegCmd", filePath + " ," + newFilePath);
         new Thread(new Runnable() {
             @Override
             public void run() {
 
 //                //调用ffmpeg进行处理
-                int result = pcm2aac(filePath, newFilePath);
+                int result = audioEncode(filePath, newFilePath);
                 Log.i("FFmpegCmd", "result : " + result);
 
             }
         }).start();
     }
 
-    //开子线程调用native方法进行音视频处理
+    //开子线程调用native方法进行音视频解码
     public static void decode(final String filePath, final String newFilePath, final Handler handler) {
         Log.d("FFmpegCmd", filePath + " ," + newFilePath);
         new Thread(new Runnable() {
@@ -61,6 +61,6 @@ public class FFmpegCmd {
     }
 
     private native static int getAVCodecVersion();
-    private native static int pcm2aac(String filePath, String newFilePath);
+    private native static int audioEncode(String filePath, String newFilePath);
     private native static int audioDecode(String filePath, String newFilePath);
 }

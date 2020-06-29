@@ -12,13 +12,6 @@
         android:text="音频解码"/>
 
     <Button
-        android:id="@+id/button1"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="PCM合并"/>
-
-    <Button
         android:id="@+id/button2"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
@@ -31,6 +24,13 @@
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:text="音频转码"/>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="PCM合并"/>
 
     <Button
         android:id="@+id/button4"
