@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.explain.media.utils.SDFileUtil;
+import com.explain.media.view.LoadingDialog;
 
 public class BaseActivity extends AppCompatActivity {
     private final static int REQUEST_CODE = 1234;
@@ -56,7 +57,19 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    protected void onSelectedFile(String filePath) {
+    protected void onSelectedFile(String filePath) { }
 
+    private LoadingDialog loadingDialog;
+    protected void showProgressDialog() {
+        if (loadingDialog == null) {
+            loadingDialog = new LoadingDialog(this);
+        }
+        loadingDialog.show();
+    }
+
+    protected void hideProgressDialog() {
+        if (loadingDialog != null) {
+            loadingDialog.dismiss();
+        }
     }
 }

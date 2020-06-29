@@ -43,7 +43,13 @@ Java_com_explain_media_utils_FFmpegCmd_pcm2aac(JNIEnv *env, jclass clazz, jstrin
 
 #define MAX_AUDIO_FRAME_SIZE 192000 // 1 second of 48khz 32bit audio
 
-static int audio_decode_example(const char *input, const char *output) {
+extern "C"
+JNIEXPORT int
+JNICALL
+Java_com_explain_media_utils_FFmpegCmd_audioDecode(JNIEnv *env, jclass clazz, jstring file_path,
+                                                   jstring new_file_path) {
+    const char *input = env->GetStringUTFChars(file_path, 0);
+    const char *output = env->GetStringUTFChars(new_file_path, 0);
     AVCodec *pCodec;
     AVCodecContext *pCodecContext;
     AVFormatContext *pFormatContext;
@@ -177,18 +183,7 @@ static int audio_decode_example(const char *input, const char *output) {
     // Close the video file
     avformat_close_input(&pFormatContext);
 
-    return 0;
-}
-
-extern "C"
-JNIEXPORT void
-JNICALL
-Java_com_explain_media_utils_FFmpegCmd_audioDecode(JNIEnv *env, jclass clazz, jstring file_path,
-                                                   jstring new_file_path) {
-    const char *input = env->GetStringUTFChars(file_path, 0);
-    const char *output = env->GetStringUTFChars(new_file_path, 0);
-    int flog = audio_decode_example(input, output);
-
     env->ReleaseStringUTFChars(file_path, input);
     env->ReleaseStringUTFChars(new_file_path, output);
+    return 0;
 }

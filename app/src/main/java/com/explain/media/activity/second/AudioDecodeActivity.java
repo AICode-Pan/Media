@@ -1,6 +1,9 @@
 package com.explain.media.activity.second;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
@@ -17,6 +20,19 @@ public class AudioDecodeActivity extends BaseActivity implements View.OnClickLis
     private static final String TAG = "AudioDecodeActivity";
     private TextView tvFilePath;
     private String filePath;
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            hideProgressDialog();
+            if (msg.what == 0) {
+                Toast.makeText(AudioDecodeActivity.this, "解码成功", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(AudioDecodeActivity.this, "解码失败", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,9 +55,11 @@ public class AudioDecodeActivity extends BaseActivity implements View.OnClickLis
                     Toast.makeText(this, "还没有选中文件地址", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                String type = filePath.substring(filePath.indexOf("."));
+                showProgressDialog();
+                String type = filePath.substring(filePath.indexOf(".") + 1);
+                String outFilePath = filePath.replace(type, "pcm");
                 Log.i("Logger", TAG + ".onClick type=" + type);
-//                FFmpegCmd.decode(filePath, );
+                FFmpegCmd.decode(filePath, outFilePath, mHandler);
                 break;
         }
     }
