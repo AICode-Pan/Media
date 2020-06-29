@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.explain.media.R;
 import com.explain.media.activity.base.BaseActivity;
+import com.explain.media.utils.FFmpegCmd;
 import com.explain.media.utils.MediaFile;
 import com.explain.media.utils.SDFileUtil;
 import com.explain.media.audio.encode.AudioEncode;
@@ -58,13 +59,14 @@ public class AudioEncodeActivity extends BaseActivity implements View.OnClickLis
 
                 Log.i(TAG, "execute pcm to aac");
                 String type = filePath.substring(filePath.indexOf(".") + 1);
-                String outFilePath = filePath.replace(type, "pcm");
+                String outFilePath = filePath.replace(type, "aac");
 
-                AudioEncode audioEncode = new AudioEncode();
-                audioEncode.setEncodeType(MediaFormat.MIMETYPE_AUDIO_AAC);
-                audioEncode.setIOPath(filePath, outFilePath);
-                audioEncode.prepare();
-                audioEncode.startAsync();
+//                AudioEncode audioEncode = new AudioEncode();
+//                audioEncode.setEncodeType(MediaFormat.MIMETYPE_AUDIO_AAC);
+//                audioEncode.setIOPath(filePath, outFilePath);
+//                audioEncode.prepare();
+//                audioEncode.startAsync();
+                FFmpegCmd.encode(filePath, outFilePath);
                 break;
         }
     }
