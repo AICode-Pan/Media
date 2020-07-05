@@ -18,8 +18,14 @@ public class FFmpegCmd {
 
     static{
         System.loadLibrary("media-handle");
-        System.loadLibrary("ffmpeg");
-        System.loadLibrary("mp3lame");
+        System.loadLibrary("avcodec");
+        System.loadLibrary("avdevice");
+        System.loadLibrary("avfilter");
+        System.loadLibrary("avformat");
+        System.loadLibrary("avresample");
+        System.loadLibrary("avutil");
+        System.loadLibrary("swresample");
+        System.loadLibrary("swscale");
     }
 
 

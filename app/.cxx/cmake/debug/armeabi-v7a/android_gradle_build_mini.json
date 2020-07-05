@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/Users/helloworld/Library/Android/sdk/ndk/21.1.6352462/build/cmake/platforms.cmake",
+    "/Users/helloworld/Library/Android/sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
+    "/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "/Users/helloworld/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/helloworld/Documents/ASProject/Media/app/.cxx/cmake/debug/armeabi-v7a\" clean"
+  ],
+  "buildTargetsCommand": "/Users/helloworld/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/Users/helloworld/Documents/ASProject/Media/app/.cxx/cmake/debug/armeabi-v7a\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "media-handle-Debug-armeabi-v7a": {
+      "artifactName": "media-handle",
+      "buildCommand": "/Users/helloworld/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/helloworld/Documents/ASProject/Media/app/.cxx/cmake/debug/armeabi-v7a\" media-handle",
+      "abi": "armeabi-v7a",
+      "output": "/Users/helloworld/Documents/ASProject/Media/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libmedia-handle.so",
+      "runtimeFiles": []
+    }
+  }
+}

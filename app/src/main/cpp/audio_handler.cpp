@@ -6,13 +6,13 @@
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR,"audio_handler", __VA_ARGS__)
 
 extern "C" {
-#include <include/libavcodec/avcodec.h>
-#include <include/libswresample/swresample.h>
-#include <include/libavutil/imgutils.h>
-#include <include/libavutil/samplefmt.h>
-#include <include/libavutil/timestamp.h>
-#include <include/libavformat/avformat.h>
-#include <include/libswscale/swscale.h>
+#include <includes/libavcodec/avcodec.h>
+#include <includes/libswresample/swresample.h>
+#include <includes/libavutil/imgutils.h>
+#include <includes/libavutil/samplefmt.h>
+#include <includes/libavutil/timestamp.h>
+#include <includes/libavformat/avformat.h>
+#include <includes/libswscale/swscale.h>
 };
 
 AVSampleFormat inSampleFmt = AV_SAMPLE_FMT_S16;
@@ -153,7 +153,7 @@ Java_com_explain_media_utils_FFmpegCmd_audioEncode(JNIEnv *env, jclass clazz, js
 //                              indata, frame->nb_samples
 //        );
 //        //编码
-//        ret = avcodec_encode_audio2(pCodecContext, packet, frame, NULL);
+//        ret = avcodec_send_frame(pCodecContext, packet, frame, NULL);
 //        if (ret < 0) {
 //            av_log(NULL, AV_LOG_ERROR, "%s", "avcodec_send_frame error\n");
 //        }
