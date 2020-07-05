@@ -1,0 +1,79 @@
+ninja: Entering directory `/Users/helloworld/Documents/ASProject/Media/app/.cxx/cmake/debug/armeabi-v7a'
+[1/2] Building CXX object CMakeFiles/media-handle.dir/audio_handler.cpp.o
+/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/audio_handler.cpp:67:5: warning: 'av_register_all' is deprecated [-Wdeprecated-declarations]
+    av_register_all();
+    ^
+/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/./includes/libavformat/avformat.h:2049:1: note: 'av_register_all' has been explicitly marked deprecated here
+attribute_deprecated
+^
+/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/includes/libavutil/attributes.h:94:49: note: expanded from macro 'attribute_deprecated'
+#    define attribute_deprecated __attribute__((deprecated))
+                                                ^
+/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/audio_handler.cpp:88:27: warning: 'codec' is deprecated [-Wdeprecated-declarations]
+    pCodecCtx = audio_st->codec;
+                          ^
+/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/./includes/libavformat/avformat.h:884:5: note: 'codec' has been explicitly marked deprecated here
+    attribute_deprecated
+    ^
+/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/includes/libavutil/attributes.h:94:49: note: expanded from macro 'attribute_deprecated'
+#    define attribute_deprecated __attribute__((deprecated))
+                                                ^
+/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/audio_handler.cpp:137:37: warning: 'codec' is deprecated [-Wdeprecated-declarations]
+    audio_st->time_base = audio_st->codec->time_base;
+                                    ^
+/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/./includes/libavformat/avformat.h:884:5: note: 'codec' has been explicitly marked deprecated here
+    attribute_deprecated
+    ^
+/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/includes/libavutil/attributes.h:94:49: note: expanded from macro 'attribute_deprecated'
+#    define attribute_deprecated __attribute__((deprecated))
+                                                ^
+/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/audio_handler.cpp:142:5: warning: ignoring return value of function declared with 'warn_unused_result' attribute [-Wunused-result]
+    avformat_write_header(pFormatCtx, NULL);
+    ^~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~
+/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/audio_handler.cpp:199:29: warning: 'codec' is deprecated [-Wdeprecated-declarations]
+    avcodec_close(audio_st->codec);
+                            ^
+/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/./includes/libavformat/avformat.h:884:5: note: 'codec' has been explicitly marked deprecated here
+    attribute_deprecated
+    ^
+/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/includes/libavutil/attributes.h:94:49: note: expanded from macro 'attribute_deprecated'
+#    define attribute_deprecated __attribute__((deprecated))
+                                                ^
+/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/audio_handler.cpp:229:5: warning: 'av_register_all' is deprecated [-Wdeprecated-declarations]
+    av_register_all();
+    ^
+/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/./includes/libavformat/avformat.h:2049:1: note: 'av_register_all' has been explicitly marked deprecated here
+attribute_deprecated
+^
+/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/includes/libavutil/attributes.h:94:49: note: expanded from macro 'attribute_deprecated'
+#    define attribute_deprecated __attribute__((deprecated))
+                                                ^
+/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/audio_handler.cpp:252:41: warning: 'codec' is deprecated [-Wdeprecated-declarations]
+        if (pFormatContext->streams[i]->codec->codec_type == AVMEDIA_TYPE_AUDIO) {
+                                        ^
+/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/./includes/libavformat/avformat.h:884:5: note: 'codec' has been explicitly marked deprecated here
+    attribute_deprecated
+    ^
+/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/includes/libavutil/attributes.h:94:49: note: expanded from macro 'attribute_deprecated'
+#    define attribute_deprecated __attribute__((deprecated))
+                                                ^
+/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/audio_handler.cpp:262:59: warning: 'codec' is deprecated [-Wdeprecated-declarations]
+    pCodecContext = pFormatContext->streams[audioStream]->codec;
+                                                          ^
+/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/./includes/libavformat/avformat.h:884:5: note: 'codec' has been explicitly marked deprecated here
+    attribute_deprecated
+    ^
+/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/includes/libavutil/attributes.h:94:49: note: expanded from macro 'attribute_deprecated'
+#    define attribute_deprecated __attribute__((deprecated))
+                                                ^
+/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/audio_handler.cpp:325:17: warning: 'avcodec_decode_audio4' is deprecated [-Wdeprecated-declarations]
+            if (avcodec_decode_audio4(pCodecContext, pFrame, &got_picture, packet) < 0) {
+                ^
+/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/includes/libavcodec/avcodec.h:4778:1: note: 'avcodec_decode_audio4' has been explicitly marked deprecated here
+attribute_deprecated
+^
+/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/includes/libavutil/attributes.h:94:49: note: expanded from macro 'attribute_deprecated'
+#    define attribute_deprecated __attribute__((deprecated))
+                                                ^
+9 warnings generated.
+[2/2] Linking CXX shared library /Users/helloworld/Documents/ASProject/Media/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libmedia-handle.so

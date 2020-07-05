@@ -5,9 +5,9 @@
     "environmentVariables": []
   },
   "cmake": {
-    "cmakeArtifactsBaseFolder": "/Users/helloworld/Documents/ASProject/Media/app/.cxx/cmake/debug/armeabi-v7a",
-    "cmakeServerLogFile": "/Users/helloworld/Documents/ASProject/Media/app/.cxx/cmake/debug/armeabi-v7a/cmake_server_log.txt",
-    "cmakeWrappingBaseFolder": "/Users/helloworld/Documents/ASProject/Media/app/.cxx/cxx/debug/armeabi-v7a",
+    "cmakeArtifactsBaseFolder": "/Users/helloworld/Documents/ASProject/Media/app/.cxx/cmake/release/armeabi-v7a",
+    "cmakeServerLogFile": "/Users/helloworld/Documents/ASProject/Media/app/.cxx/cmake/release/armeabi-v7a/cmake_server_log.txt",
+    "cmakeWrappingBaseFolder": "/Users/helloworld/Documents/ASProject/Media/app/.cxx/cxx/release/armeabi-v7a",
     "effectiveConfiguration": {
       "name": "traditional-android-studio-cmake-environment",
       "description": "Composite reified CMakeSettings configuration",
@@ -15,17 +15,17 @@
       "inheritEnvironments": [
         "ndk"
       ],
-      "buildRoot": "/Users/helloworld/Documents/ASProject/Media/app/.cxx/cmake/debug/armeabi-v7a",
+      "buildRoot": "/Users/helloworld/Documents/ASProject/Media/app/.cxx/cmake/release/armeabi-v7a",
       "cmakeToolchain": "/Users/helloworld/Library/Android/sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
       "cmakeExecutable": "/Users/helloworld/Library/Android/sdk/cmake/3.10.2.4988404/bin/cmake",
       "variables": [
         {
           "name": "CMAKE_FIND_ROOT_PATH",
-          "value": "/Users/helloworld/Documents/ASProject/Media/app/.cxx/cmake/debug/prefab/armeabi-v7a/prefab"
+          "value": "/Users/helloworld/Documents/ASProject/Media/app/.cxx/cmake/release/prefab/armeabi-v7a/prefab"
         },
         {
           "name": "CMAKE_BUILD_TYPE",
-          "value": "Debug"
+          "value": "Release"
         },
         {
           "name": "CMAKE_TOOLCHAIN_FILE",
@@ -57,7 +57,7 @@
         },
         {
           "name": "CMAKE_LIBRARY_OUTPUT_DIRECTORY",
-          "value": "/Users/helloworld/Documents/ASProject/Media/app/build/intermediates/cmake/debug/obj/armeabi-v7a"
+          "value": "/Users/helloworld/Documents/ASProject/Media/app/build/intermediates/cmake/release/obj/armeabi-v7a"
         },
         {
           "name": "CMAKE_MAKE_PROGRAM",
@@ -74,14 +74,14 @@
       ]
     }
   },
-  "cxxBuildFolder": "/Users/helloworld/Documents/ASProject/Media/app/.cxx/cmake/debug/armeabi-v7a",
+  "cxxBuildFolder": "/Users/helloworld/Documents/ASProject/Media/app/.cxx/cmake/release/armeabi-v7a",
   "info": {
     "abi": "ARMEABI_V7A",
     "bitness": 32,
     "deprecated": false,
     "default": true
   },
-  "originalCxxBuildFolder": "/Users/helloworld/Documents/ASProject/Media/app/.cxx/cmake/debug/armeabi-v7a",
+  "originalCxxBuildFolder": "/Users/helloworld/Documents/ASProject/Media/app/.cxx/cmake/release/armeabi-v7a",
   "variant": {
     "buildSystemArgumentList": [],
     "buildTargetSet": [],
@@ -90,7 +90,7 @@
     "cppFlagsList": [
       ""
     ],
-    "isDebuggableEnabled": true,
+    "isDebuggableEnabled": false,
     "module": {
       "buildSystem": "CMAKE",
       "cmake": {
@@ -170,7 +170,6 @@
       "project": {
         "compilerSettingsCacheFolder": "/Users/helloworld/Documents/ASProject/Media/.cxx",
         "cxxFolder": "/Users/helloworld/Documents/ASProject/Media/.cxx",
-        "ideBuildTargetAbi": "arm64-v8a,armeabi-v7a,armeabi",
         "isBuildOnlyTargetAbiEnabled": true,
         "isCmakeBuildCohabitationEnabled": false,
         "isNativeCompilerSettingsCacheEnabled": false,
@@ -191,13 +190,13 @@
         "SYSTEM": {}
       }
     },
-    "objFolder": "/Users/helloworld/Documents/ASProject/Media/app/build/intermediates/cmake/debug/obj",
-    "variantName": "debug",
+    "objFolder": "/Users/helloworld/Documents/ASProject/Media/app/build/intermediates/cmake/release/obj",
+    "variantName": "release",
     "validAbiList": [
       "ARMEABI_V7A"
     ],
-    "prefabDirectory": "/Users/helloworld/Documents/ASProject/Media/app/.cxx/cmake/debug/prefab",
+    "prefabDirectory": "/Users/helloworld/Documents/ASProject/Media/app/.cxx/cmake/release/prefab",
     "prefabPackageDirectoryList": []
   },
-  "prefabFolder": "/Users/helloworld/Documents/ASProject/Media/app/.cxx/cmake/debug/prefab/armeabi-v7a"
+  "prefabFolder": "/Users/helloworld/Documents/ASProject/Media/app/.cxx/cmake/release/prefab/armeabi-v7a"
 }

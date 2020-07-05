@@ -39,7 +39,7 @@ public class FFmpegCmd {
 
 //                //调用ffmpeg进行处理
                 int result = audioEncode(filePath, newFilePath);
-                Log.i("FFmpegCmd", "编码完成");
+                Log.i("FFmpegCmd", "编码完成 result=" + result);
 
             }
         }).start();
