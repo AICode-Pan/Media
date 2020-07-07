@@ -13,6 +13,7 @@ extern "C" {
 #include <includes/libavutil/timestamp.h>
 #include <includes/libavformat/avformat.h>
 #include <includes/libswscale/swscale.h>
+#include <includes/libfaac/faac.h>
 };
 
 AVSampleFormat inSampleFmt = AV_SAMPLE_FMT_S16;

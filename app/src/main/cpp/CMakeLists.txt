@@ -55,6 +55,12 @@ add_library(swscale
 set_target_properties(swscale
         PROPERTIES IMPORTED_LOCATION
         ../../../../libs/${ANDROID_ABI}/libswscale.so)
+add_library(faac
+        SHARED
+        IMPORTED)
+set_target_properties(faac
+        PROPERTIES IMPORTED_LOCATION
+        ../../../../libs/libfaac.so)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
@@ -78,6 +84,7 @@ target_link_libraries( # Specifies the target library.
         avutil
         swresample
         swscale
+        faac
 
         # Links the target library to the log library
         # included in the NDK.

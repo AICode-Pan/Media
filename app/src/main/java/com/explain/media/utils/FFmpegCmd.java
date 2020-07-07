@@ -26,6 +26,7 @@ public class FFmpegCmd {
         System.loadLibrary("avutil");
         System.loadLibrary("swresample");
         System.loadLibrary("swscale");
+        System.loadLibrary("faac");
     }
 
 
