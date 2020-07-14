@@ -1,19 +1,9 @@
 # ninja log v5
-0	878	1593946231	CMakeFiles/media-handle.dir/audio_handler.cpp.o	64fdcc32d1a04eba
-879	985	1593946231	/Users/helloworld/Documents/ASProject/Media/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libmedia-handle.so	8f67fd9ac7ce202d
-1	1081	1593946740	CMakeFiles/media-handle.dir/audio_handler.cpp.o	64fdcc32d1a04eba
-1081	1180	1593946740	/Users/helloworld/Documents/ASProject/Media/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libmedia-handle.so	8f67fd9ac7ce202d
-1	760	1593946878	CMakeFiles/media-handle.dir/audio_handler.cpp.o	64fdcc32d1a04eba
-760	873	1593946878	/Users/helloworld/Documents/ASProject/Media/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libmedia-handle.so	8f67fd9ac7ce202d
-2	959	1593946903	CMakeFiles/media-handle.dir/audio_handler.cpp.o	64fdcc32d1a04eba
-959	1050	1593946903	/Users/helloworld/Documents/ASProject/Media/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libmedia-handle.so	8f67fd9ac7ce202d
-1	670	1593946989	CMakeFiles/media-handle.dir/audio_handler.cpp.o	64fdcc32d1a04eba
-671	774	1593946989	/Users/helloworld/Documents/ASProject/Media/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libmedia-handle.so	8f67fd9ac7ce202d
-2	1207	1593947473	CMakeFiles/media-handle.dir/audio_handler.cpp.o	64fdcc32d1a04eba
-1207	1349	1593947473	/Users/helloworld/Documents/ASProject/Media/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libmedia-handle.so	8f67fd9ac7ce202d
-1	787	1593947991	CMakeFiles/media-handle.dir/audio_handler.cpp.o	64fdcc32d1a04eba
-787	1005	1593947991	/Users/helloworld/Documents/ASProject/Media/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libmedia-handle.so	8f67fd9ac7ce202d
-1	828	1593948107	CMakeFiles/media-handle.dir/audio_handler.cpp.o	64fdcc32d1a04eba
-828	925	1593948107	/Users/helloworld/Documents/ASProject/Media/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libmedia-handle.so	8f67fd9ac7ce202d
-1	690	1593948197	CMakeFiles/media-handle.dir/audio_handler.cpp.o	64fdcc32d1a04eba
-691	793	1593948197	/Users/helloworld/Documents/ASProject/Media/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libmedia-handle.so	8f67fd9ac7ce202d
+1	29	0	clean	42ef3b9adb651c9a
+1	10	0	clean	42ef3b9adb651c9a
+1	818	615704204	CMakeFiles/media-handle.dir/audio_handler.cpp.o	b745f022495f3532
+822	1584	615704205	D:/AndroidProject/Media/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libmedia-handle.so	1a24f0eaeee96bdc
+3	835	615704379	CMakeFiles/media-handle.dir/audio_handler.cpp.o	b745f022495f3532
+835	1150	615704379	D:/AndroidProject/Media/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libmedia-handle.so	1a24f0eaeee96bdc
+4	491	615704594	CMakeFiles/media-handle.dir/audio_handler.cpp.o	b745f022495f3532
+491	663	615704594	D:/AndroidProject/Media/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libmedia-handle.so	1a24f0eaeee96bdc

@@ -33,6 +33,35 @@ Java_com_explain_media_utils_FFmpegCmd_getAVCodecVersion(JNIEnv *env, jclass cla
     return i;
 }
 
+int flush_encoder(AVFormatContext *fmt_ctx,unsigned int stream_index){
+    int ret;
+    int got_frame;
+    AVPacket enc_pkt;
+    if (!(fmt_ctx->streams[stream_index]->codec->codec->capabilities &
+          AV_CODEC_CAP_DELAY))
+        return 0;
+    while (1) {
+        enc_pkt.data = NULL;
+        enc_pkt.size = 0;
+        av_init_packet(&enc_pkt);
+        ret = avcodec_encode_audio2 (fmt_ctx->streams[stream_index]->codec, &enc_pkt,
+                                     NULL, &got_frame);
+        av_frame_free(NULL);
+        if (ret < 0)
+            break;
+        if (!got_frame){
+            ret=0;
+            break;
+        }
+        LOGE("Flush Encoder: Succeed to encode 1 frame!\tsize:%5d\n",enc_pkt.size);
+        /* mux encoded frame */
+        ret = av_write_frame(fmt_ctx, &enc_pkt);
+        if (ret < 0)
+            break;
+    }
+    return ret;
+}
+
 // 音频编码
 extern "C"
 JNIEXPORT jint
@@ -40,172 +69,132 @@ JNICALL
 Java_com_explain_media_utils_FFmpegCmd_audioEncode(JNIEnv *env, jclass clazz, jstring file_path,
                                                jstring out_file_path) {
     const char *souPath = env->GetStringUTFChars(file_path, 0);
-    const char *tarPath = env->GetStringUTFChars(out_file_path, 0);
+    const char *out_file = env->GetStringUTFChars(out_file_path, 0);
 
-    LOGE("%s\n%s", souPath, tarPath);
-    // TODO
-    AVFormatContext *pFormatCtx;
-    AVOutputFormat *fmt;
-    AVStream *audio_st;
-    AVCodecContext *pCodecCtx;
-    AVCodec *pCodec;
-    int ret = 0;
-    uint8_t *frame_buf;
-    AVFrame *frame;
-    int size;
+    AVFormatContext* pFormatCtx;
+    AVOutputFormat* fmt;
+    AVStream* audio_st;
+    AVCodecContext* pCodecCtx;
+    AVCodec* pCodec;
 
-    FILE *in_file = fopen(souPath, "rb");    //音频PCM采样数据
-    const char *out_file = tarPath;                    //输出文件路径
+    uint8_t* frame_buf;
+    AVFrame* pFrame;
+    AVPacket pkt;
 
-    AVSampleFormat inSampleFmt = AV_SAMPLE_FMT_S16;
-    AVSampleFormat outSampleFmt = AV_SAMPLE_FMT_S16;
-    const int sampleRate = 44100;
-    const int channels = 2;
-    const int sampleByte = 2;
-    int readSize;
+    int got_frame=0;
+    int ret=0;
+    int size=0;
+
+    FILE *in_file=NULL;	                        //Raw PCM data
+    int framenum=1000;                          //Audio frame number
+    int i;
+
+    in_file= fopen(souPath, "rb");
 
     av_register_all();
 
-    avformat_alloc_output_context2(&pFormatCtx, NULL, NULL, out_file);
-    fmt = pFormatCtx->oformat;
+    //Method 1.
+    pFormatCtx = avformat_alloc_context();
+    fmt = av_guess_format(NULL, out_file, NULL);
+    pFormatCtx->oformat = fmt;
 
-    //注意输出路径
-    if (avio_open(&pFormatCtx->pb, out_file, AVIO_FLAG_READ_WRITE) < 0) {
-        LOGE("输出文件打开失败！");
+
+    //Method 2.
+    //avformat_alloc_output_context2(&pFormatCtx, NULL, NULL, out_file);
+    //fmt = pFormatCtx->oformat;
+
+    //Open output URL
+    if (avio_open(&pFormatCtx->pb,out_file, AVIO_FLAG_READ_WRITE) < 0){
+        LOGE("Failed to open output file!\n");
         return -1;
     }
-//    pCodec = avcodec_find_encoder_by_name("libfdk_aac");
-    pCodec = avcodec_find_encoder(AV_CODEC_ID_AAC);
-    if (!pCodec) {
-        LOGE("没有找到合适的编码器！");
-        return -1;
-    }
-    audio_st = avformat_new_stream(pFormatCtx, pCodec);
-    if (audio_st == NULL) {
-        LOGE("avformat_new_stream error");
+
+    audio_st = avformat_new_stream(pFormatCtx, 0);
+    if (audio_st==NULL){
         return -1;
     }
     pCodecCtx = audio_st->codec;
-    pCodecCtx->codec_id = fmt->audio_codec;
+    pCodecCtx->codec_id = AV_CODEC_ID_AAC;
     pCodecCtx->codec_type = AVMEDIA_TYPE_AUDIO;
-    pCodecCtx->sample_fmt = outSampleFmt;
-    pCodecCtx->sample_rate = sampleRate;
-    pCodecCtx->channel_layout = AV_CH_LAYOUT_STEREO;
+    pCodecCtx->sample_fmt = AV_SAMPLE_FMT_S16;
+    pCodecCtx->sample_rate= 44100;
+    pCodecCtx->channel_layout=AV_CH_LAYOUT_STEREO;
     pCodecCtx->channels = av_get_channel_layout_nb_channels(pCodecCtx->channel_layout);
     pCodecCtx->bit_rate = 64000;
 
-    //输出格式信息
+    //Show some information
     av_dump_format(pFormatCtx, 0, out_file, 1);
-    ///2 音频重采样 上下文初始化
-    SwrContext *asc = NULL;
-    asc = swr_alloc_set_opts(asc,
-                             av_get_default_channel_layout(channels), outSampleFmt,
-                             sampleRate,//输出格式
-                             av_get_default_channel_layout(channels), inSampleFmt, sampleRate, 0,
-                             0);//输入格式
-    if (!asc) {
-        LOGE("swr_alloc_set_opts failed!");
+
+    pCodec = avcodec_find_encoder(pCodecCtx->codec_id);
+
+    if (!pCodec){
+        LOGE("Can not find encoder!\n");
         return -1;
     }
-    ret = swr_init(asc);
-    if (ret < 0) {
-        LOGE("swr_init error");
-        return ret;
-    }
-
-    if (avcodec_open2(pCodecCtx, pCodec, NULL) < 0) {
-        LOGE("编码器打开失败！");
+    if (avcodec_open2(pCodecCtx, pCodec,NULL) < 0){
+        LOGE("Failed to open encoder!\n");
         return -1;
     }
-    frame = av_frame_alloc();
-    frame->nb_samples = pCodecCtx->frame_size;
-    frame->format = pCodecCtx->sample_fmt;
-    LOGE("sample_rate:%d,frame_size:%d, channels:%d", sampleRate,
-           frame->nb_samples, frame->channels);
-    //编码每一帧的字节数
-    size = av_samples_get_buffer_size(NULL, pCodecCtx->channels, pCodecCtx->frame_size,
-                                      pCodecCtx->sample_fmt, 1);
-    frame_buf = (uint8_t *) av_malloc(size);
-    //一次读取一帧音频的字节数
-    readSize = frame->nb_samples * channels * sampleByte;
-    char *buf = new char[readSize];
+    pFrame = av_frame_alloc();
+    pFrame->nb_samples= pCodecCtx->frame_size;
+    pFrame->format= pCodecCtx->sample_fmt;
 
-    avcodec_fill_audio_frame(frame, pCodecCtx->channels, pCodecCtx->sample_fmt,
-                             (const uint8_t *) frame_buf, size, 1);
+    size = av_samples_get_buffer_size(NULL, pCodecCtx->channels,pCodecCtx->frame_size,pCodecCtx->sample_fmt, 1);
+    frame_buf = (uint8_t *)av_malloc(size);
+    avcodec_fill_audio_frame(pFrame, pCodecCtx->channels, pCodecCtx->sample_fmt,(const uint8_t*)frame_buf, size, 1);
 
-    audio_st->codecpar->codec_tag = 0;
-    audio_st->time_base = audio_st->codec->time_base;
-    //从编码器复制参数
-    avcodec_parameters_from_context(audio_st->codecpar, pCodecCtx);
+    //Write Header
+    avformat_write_header(pFormatCtx,NULL);
 
-    //写文件头
-    avformat_write_header(pFormatCtx, NULL);
-    AVPacket pkt;
-    av_new_packet(&pkt, size);
-    int apts = 0;
+    av_new_packet(&pkt,size);
 
-    for (int i = 0;; i++) {
-        //读入PCM
-        if (fread(buf, 1, readSize, in_file) < 0) {
-            printf("文件读取错误！\n");
+    for (i=0; i<framenum; i++){
+        //Read PCM
+        if (fread(frame_buf, 1, size, in_file) <= 0){
+            LOGE("Failed to read raw data! \n");
             return -1;
-        } else if (feof(in_file)) {
+        }else if(feof(in_file)){
             break;
         }
-        frame->pts = apts;
-        //计算pts
-        AVRational av;
-        av.num = 1;
-        av.den = sampleRate;
-        apts += av_rescale_q(frame->nb_samples, av, pCodecCtx->time_base);
-        //重采样源数据
-        const uint8_t *indata[AV_NUM_DATA_POINTERS] = {0};
-        indata[0] = (uint8_t *) buf;
-        ret = swr_convert(asc, frame->data, frame->nb_samples, //输出参数，输出存储地址和样本数量
-                          indata, frame->nb_samples
-        );
-        if (ret < 0) {
-            LOGE("swr_convert error");
-            return ret;
+        pFrame->data[0] = frame_buf;  //PCM Data
+
+        pFrame->pts=i*100;
+        got_frame=0;
+        //Encode
+        ret = avcodec_encode_audio2(pCodecCtx, &pkt,pFrame, &got_frame);
+        if(ret < 0){
+            LOGE("Failed to encode!\n");
+            return -1;
         }
-        //编码
-        ret = avcodec_send_frame(pCodecCtx, frame);
-        if (ret < 0) {
-            LOGE("avcodec_send_frame error\n");
-            return ret;
+        if (got_frame==1){
+            LOGE("Succeed to encode 1 frame! \tsize:%5d\n",pkt.size);
+            pkt.stream_index = audio_st->index;
+            ret = av_write_frame(pFormatCtx, &pkt);
+            av_free_packet(&pkt);
         }
-        //接受编码后的数据
-        ret = avcodec_receive_packet(pCodecCtx, &pkt);
-        if (ret < 0) {
-            LOGE("avcodec_receive_packet！error \n");
-            continue;
-        }
-        //pts dts duration转换为以audio_st->time_base为基准的值。
-        pkt.stream_index = audio_st->index;
-        pkt.pts = av_rescale_q(pkt.pts, pCodecCtx->time_base, audio_st->time_base);
-        pkt.dts = av_rescale_q(pkt.dts, pCodecCtx->time_base, audio_st->time_base);
-        pkt.duration = av_rescale_q(pkt.duration, pCodecCtx->time_base, audio_st->time_base);
-        ret = av_write_frame(pFormatCtx, &pkt);
-        if (ret < 0) {
-            LOGE( "av_write_frame error!");
-        } else {
-            LOGE(" 第%d帧 encode success", i);
-        }
-        av_packet_unref(&pkt);
     }
-    //写文件尾
+
+    //Flush Encoder
+    ret = flush_encoder(pFormatCtx,0);
+    if (ret < 0) {
+        LOGE("Flushing encoder failed\n");
+        return -1;
+    }
+
+    //Write Trailer
     av_write_trailer(pFormatCtx);
-    //清理
-    avcodec_close(audio_st->codec);
-    av_free(frame);
-    av_free(frame_buf);
+
+    //Clean
+    if (audio_st){
+        avcodec_close(audio_st->codec);
+        av_free(pFrame);
+        av_free(frame_buf);
+    }
     avio_close(pFormatCtx->pb);
     avformat_free_context(pFormatCtx);
 
     fclose(in_file);
-    LOGE("finish !");
-    env->ReleaseStringUTFChars(file_path, souPath);
-    env->ReleaseStringUTFChars(out_file_path, tarPath);
+
     return 0;
 }
 

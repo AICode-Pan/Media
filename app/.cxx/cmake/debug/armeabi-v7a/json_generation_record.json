@@ -2,25 +2,25 @@
   {
     "level": "INFO",
     "message": "Start JSON generation. Platform version: 21 min SDK version: armeabi-v7a",
-    "file": "/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/CMakeLists.txt",
+    "file": "D:\\AndroidProject\\Media\\app\\src\\main\\cpp\\CMakeLists.txt",
     "tag": "debug|armeabi-v7a"
   },
   {
     "level": "INFO",
-    "message": "- CMake found from cmake.dir at \u0027/Users/helloworld/Library/Android/sdk/cmake/3.10.2.4988404\u0027 had version \u00273.10.2\u0027",
-    "file": "/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/CMakeLists.txt",
+    "message": "- CMake found from cmake.dir at \u0027C:\\Users\\PC\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\u0027 had version \u00273.10.2\u0027",
+    "file": "D:\\AndroidProject\\Media\\app\\src\\main\\cpp\\CMakeLists.txt",
     "tag": "debug|armeabi-v7a"
   },
   {
     "level": "INFO",
-    "message": "JSON \u0027/Users/helloworld/Documents/ASProject/Media/app/.cxx/cmake/debug/armeabi-v7a/android_gradle_build.json\u0027 was up-to-date",
-    "file": "/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/CMakeLists.txt",
+    "message": "JSON \u0027D:\\AndroidProject\\Media\\app\\.cxx\\cmake\\debug\\armeabi-v7a\\android_gradle_build.json\u0027 was up-to-date",
+    "file": "D:\\AndroidProject\\Media\\app\\src\\main\\cpp\\CMakeLists.txt",
     "tag": "debug|armeabi-v7a"
   },
   {
     "level": "INFO",
     "message": "JSON generation completed without problems",
-    "file": "/Users/helloworld/Documents/ASProject/Media/app/src/main/cpp/CMakeLists.txt",
+    "file": "D:\\AndroidProject\\Media\\app\\src\\main\\cpp\\CMakeLists.txt",
     "tag": "debug|armeabi-v7a"
   }
 ]

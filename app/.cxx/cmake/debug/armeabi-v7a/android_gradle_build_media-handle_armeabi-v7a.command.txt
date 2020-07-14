@@ -1,7 +1,7 @@
-Executable : /Users/helloworld/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja
+Executable : C:\Users\PC\AppData\Local\Android\Sdk\cmake\3.10.2.4988404\bin\ninja.exe
 arguments : 
 -C
-/Users/helloworld/Documents/ASProject/Media/app/.cxx/cmake/debug/armeabi-v7a
+D:\AndroidProject\Media\app\.cxx\cmake\debug\armeabi-v7a
 media-handle
 jvmArgs : 
 

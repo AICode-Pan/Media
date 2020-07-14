@@ -2,6 +2,7 @@
 *.iml
 .gradle/
 .idea/
+app/.cxx/
 build/
 gradle/
 gradlew
