@@ -204,8 +204,8 @@ CMAKE_SYSTEM_NAME:UNINITIALIZED=Android
 //No help, variable specified on the command line.
 CMAKE_SYSTEM_VERSION:UNINITIALIZED=21
 
-//The CMake toolchain file
-CMAKE_TOOLCHAIN_FILE:FILEPATH=C:/Users/PC/AppData/Local/Android/Sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake
+//No help, variable specified on the command line.
+CMAKE_TOOLCHAIN_FILE:UNINITIALIZED=C:\Users\PC\AppData\Local\Android\Sdk\ndk\21.1.6352462\build\cmake\android.toolchain.cmake
 
 //If this value is on, makefiles will be generated without the
 // .SILENT directive, and all commands will be echoed to the console
@@ -223,7 +223,7 @@ Project_SOURCE_DIR:STATIC=D:/AndroidProject/Media/app/src/main/cpp
 log-lib:FILEPATH=C:/Users/PC/AppData/Local/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/liblog.so
 
 //Dependencies for the target
-media-handle_LIB_DEPENDS:STATIC=general;avcodec;general;avdevice;general;avfilter;general;avformat;general;avresample;general;avutil;general;swresample;general;swscale;general;C:/Users/PC/AppData/Local/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/liblog.so;
+media-handle_LIB_DEPENDS:STATIC=general;avcodec;general;avdevice;general;avfilter;general;avformat;general;avresample;general;avutil;general;swresample;general;swscale;general;faac;general;C:/Users/PC/AppData/Local/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/liblog.so;
 
 
 ########################

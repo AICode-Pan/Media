@@ -59,14 +59,14 @@ public class AudioEncodeActivity extends BaseActivity implements View.OnClickLis
 
                 Log.i(TAG, "execute pcm to aac");
                 String type = filePath.substring(filePath.indexOf(".") + 1);
-                String outFilePath = filePath.replace(type, "aac");
+                String outFilePath = filePath.replace(type, "rtttl");
 
-//                AudioEncode audioEncode = new AudioEncode();
-//                audioEncode.setEncodeType(MediaFormat.MIMETYPE_AUDIO_AAC);
-//                audioEncode.setIOPath(filePath, outFilePath);
-//                audioEncode.prepare();
-//                audioEncode.startAsync();
-                FFmpegCmd.encode(filePath, outFilePath);
+                AudioEncode audioEncode = new AudioEncode();
+                audioEncode.setEncodeType(MediaFormat.MIMETYPE_AUDIO_AAC);
+                audioEncode.setIOPath(filePath, outFilePath);
+                audioEncode.prepare();
+                audioEncode.startAsync();
+//                FFmpegCmd.encode(filePath, outFilePath);
                 break;
         }
     }
